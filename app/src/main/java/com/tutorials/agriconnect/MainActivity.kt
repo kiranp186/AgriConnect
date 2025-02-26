@@ -4,6 +4,8 @@ package com.tutorials.agriconnect
 
 import LoginPage
 import LoginScreen
+import SignUpPage
+import SignupScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -61,9 +63,10 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    LoginScreen()
+                    SignupScreen()
 
-                }
+
+                    }
 
             }
 

@@ -41,7 +41,7 @@ fun SignupScreen() {
     // User type selection
     var expanded by remember { mutableStateOf(false) }
     var selectedUserType by remember { mutableStateOf("Select User Type") }
-    val userTypes = listOf("Farmer", "Service Provider")
+    val userTypes = listOf("Farmer", "Equipment Provider")
 
     // Location details
     var state by remember { mutableStateOf("") }
