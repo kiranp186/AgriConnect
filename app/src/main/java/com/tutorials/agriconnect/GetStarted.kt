@@ -1,9 +1,4 @@
-// MainActivity.kt
-package com.example.agriconnect
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,18 +14,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AgriConnectApp()
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * A composable that displays the Get Started screen of the AgriConnect app
+ */
 @Composable
-fun AgriConnectApp() {
+fun GetStartedScreen(onGetStartedClick: () -> Unit = {}) {
     // Define colors
     val backgroundColor = Color(0xFFF5F2E9) // Light wheat color for background
     val primaryColor = Color(0xFFBFA265) // Gold color for accents
@@ -38,118 +26,113 @@ fun AgriConnectApp() {
     val gradientTop = Color(0xFFF8F4E3)
     val gradientBottom = Color(0xFFEAE0C8)
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    // Use a box with gradient background instead of image
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(gradientTop, gradientBottom)
+                )
+            )
+            .padding(16.dp)
     ) {
-        // Use a box with gradient background instead of image
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(gradientTop, gradientBottom)
-                    )
-                )
-                .padding(16.dp)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+            // Logo placeholder - a colored box
+            Box(
+                modifier = Modifier
+                    .size(60.dp)
+                    .padding(top = 16.dp)
+                    .background(
+                        color = primaryColor,
+                        shape = RoundedCornerShape(8.dp)
+                    )
             ) {
-                // Logo placeholder - a colored box
-                Box(
-                    modifier = Modifier
-                        .size(60.dp)
-                        .padding(top = 16.dp)
-                        .background(
-                            color = primaryColor,
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                ) {
-                    // Leaf icon represented as text
-                    Text(
-                        text = "🌱",
-                        fontSize = 24.sp,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Main headline text
+                // Leaf icon represented as text
                 Text(
-                    text = "THE NEW ERA OF\nAGRICULTURE",
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = primaryColor,
-                    textAlign = TextAlign.Center,
-                    lineHeight = 36.sp
+                    text = "🌱",
+                    fontSize = 24.sp,
+                    modifier = Modifier.align(Alignment.Center)
                 )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Subtitle text
-                Text(
-                    text = "Sustainable farming solutions for a better tomorrow.",
-                    fontSize = 16.sp,
-                    color = textColor,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(horizontal = 24.dp)
-                )
-
-                Spacer(modifier = Modifier.weight(1f))
-
-                // Stat cards
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    // Growth stat card
-                    StatCard(
-                        emoji = "📈",
-                        label = "Growth",
-                        value = "12 cm"
-                    )
-
-                    // Moisture stat card
-                    StatCard(
-                        emoji = "💧",
-                        label = "Moisture",
-                        value = "75%"
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Get Started button
-                Button(
-                    onClick = { /* Handle button click */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                        .padding(horizontal = 16.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = primaryColor
-                    ),
-                    shape = RoundedCornerShape(28.dp)
-                ) {
-                    Text(
-                        text = "Get Started",
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.White
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(32.dp))
             }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Main headline text
+            Text(
+                text = "THE NEW ERA OF\nAGRICULTURE",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                color = primaryColor,
+                textAlign = TextAlign.Center,
+                lineHeight = 36.sp
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Subtitle text
+            Text(
+                text = "Sustainable farming solutions for a better tomorrow.",
+                fontSize = 16.sp,
+                color = textColor,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(horizontal = 24.dp)
+            )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // Stat cards
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                // Growth stat card
+                StatCard(
+                    emoji = "📈",
+                    label = "Growth",
+                    value = "12 cm"
+                )
+
+                // Moisture stat card
+                StatCard(
+                    emoji = "💧",
+                    label = "Moisture",
+                    value = "75%"
+                )
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Get Started button
+            Button(
+                onClick = onGetStartedClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(horizontal = 16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = primaryColor
+                ),
+                shape = RoundedCornerShape(28.dp)
+            ) {
+                Text(
+                    text = "Get Started",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.White
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
 
 @Composable
-fun StatCard(emoji: String, label: String, value: String) {
+private fun StatCard(emoji: String, label: String, value: String) {
     Card(
         modifier = Modifier
             .width(120.dp)
@@ -192,6 +175,6 @@ fun StatCard(emoji: String, label: String, value: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun AgriConnectPreview() {
-    AgriConnectApp()
+fun GetStartedPreview() {
+    GetStartedScreen()
 }

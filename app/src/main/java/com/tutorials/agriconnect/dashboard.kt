@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -164,8 +165,8 @@ private fun NewScrollableSection() {
 private fun FeaturedBox(title: String) {
     Box(
         modifier = Modifier
-            .width(160.dp)
-            .height(100.dp)
+            .width(320.dp)
+            .height(200.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(Color(0x55FFFFFF)),
         contentAlignment = Alignment.Center
@@ -176,20 +177,20 @@ private fun FeaturedBox(title: String) {
             modifier = Modifier.padding(8.dp)
         ) {
             // Placeholder for image/icon
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .background(Color.White, shape = RoundedCornerShape(8.dp))
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = title,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color.White
-            )
+//            Box(
+//                modifier = Modifier
+//                    .size(36.dp)
+//                    .background(Color.White, shape = RoundedCornerShape(8.dp))
+//            )
+//
+//            Spacer(modifier = Modifier.height(8.dp))
+//
+//            Text(
+//                text = title,
+//                fontSize = 14.sp,
+//                fontWeight = FontWeight.Medium,
+//                color = Color.White
+//            )
         }
     }
 }
@@ -209,27 +210,51 @@ private fun CommoditiesSection() {
             modifier = Modifier.padding(bottom = 12.dp)
         )
 
-        // Define commodity items - without resource references
-        val commodities = listOf(
+        // Define commodity items for first row
+        val commoditiesRow1 = listOf(
             Commodity("Rice"),
             Commodity("Corn"),
-            Commodity("Grapes"),
+            Commodity("Grapes")
+        )
+
+        // Define commodity items for second row
+        val commoditiesRow2 = listOf(
             Commodity("Potato"),
             Commodity("Olive"),
             Commodity("Tomato")
         )
 
-        // Create an infinite list by repeating the original list
-        val infiniteList = remember {
-            generateSequence { commodities }.flatten().take(1000).toList()
-        }
-
+        // First row of commodities
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items(infiniteList.size) { index ->
-                val commodity = infiniteList[index]
+            // Create an infinite list by repeating the original list
+            val infiniteList1 = remember {
+                generateSequence { commoditiesRow1 }.flatten().take(1000).toList()
+            }
+
+            items(infiniteList1.size) { index ->
+                val commodity = infiniteList1[index]
+                CommodityBox(commodity)
+            }
+        }
+
+        // Add spacing between rows
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // Second row of commodities
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            // Create an infinite list by repeating the original list
+            val infiniteList2 = remember {
+                generateSequence { commoditiesRow2 }.flatten().take(1000).toList()
+            }
+
+            items(infiniteList2.size) { index ->
+                val commodity = infiniteList2[index]
                 CommodityBox(commodity)
             }
         }
@@ -266,7 +291,6 @@ private fun CommodityBox(commodity: Commodity) {
         )
     }
 }
-
 @Composable
 private fun MyFieldsSection() {
     Column(
@@ -318,3 +342,12 @@ private fun BottomNavItem(isSelected: Boolean) {
 private data class Commodity(
     val name: String
 )
+
+@Preview(showBackground=true)
+
+@Composable
+
+fun Preview(){
+
+    FarmersAppScreen()
+}
