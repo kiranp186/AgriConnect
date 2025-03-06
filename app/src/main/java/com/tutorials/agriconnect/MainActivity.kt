@@ -2,6 +2,7 @@ package com.tutorials.agriconnect
 
 
 
+import FarmersAppScreen
 import LoginPage
 import LoginScreen
 import SignUpPage
@@ -41,8 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tutorials.agriconnect.ui.theme.AgriconnectTheme
 
-
-
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,8 +62,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    SignupScreen()
-
+                    FarmersAppScreen()
 
                     }
 
@@ -88,6 +86,5 @@ class MainActivity : ComponentActivity() {
 
 fun APreview(){
 
-    LoginScreen()
-
+    FarmersAppScreen()
 }
