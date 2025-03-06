@@ -90,6 +90,9 @@ fun FarmersAppScreen() {
             }
         }
 
+        // NEW SECTION: Added New Scrollable Section
+        NewScrollableSection()
+
         // Commodity Scroll Component
         CommoditiesSection()
 
@@ -111,6 +114,82 @@ fun FarmersAppScreen() {
             BottomNavItem(isSelected = false)
             BottomNavItem(isSelected = false)
             BottomNavItem(isSelected = false)
+        }
+    }
+}
+
+@Composable
+private fun NewScrollableSection() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Featured Content",
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier.padding(bottom = 12.dp)
+        )
+
+        // Define items for the new section
+        val featuredItems = listOf(
+            "Weather Updates",
+            "Market Prices",
+            "Farming Tips",
+            "Equipment Rental",
+            "Community News",
+            "Seasonal Crops"
+        )
+
+        // Create an infinite list by repeating the original list
+        val infiniteList = remember {
+            generateSequence { featuredItems }.flatten().take(1000).toList()
+        }
+
+        LazyRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(infiniteList.size) { index ->
+                val item = infiniteList[index]
+                FeaturedBox(item)
+            }
+        }
+    }
+}
+
+@Composable
+private fun FeaturedBox(title: String) {
+    Box(
+        modifier = Modifier
+            .width(160.dp)
+            .height(100.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color(0x55FFFFFF)),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(8.dp)
+        ) {
+            // Placeholder for image/icon
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .background(Color.White, shape = RoundedCornerShape(8.dp))
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = title,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.White
+            )
         }
     }
 }
