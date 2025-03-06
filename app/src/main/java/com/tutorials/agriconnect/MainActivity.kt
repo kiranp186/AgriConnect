@@ -2,8 +2,11 @@ package com.tutorials.agriconnect
 
 
 
+import FarmersAppScreen
 import LoginPage
 import LoginScreen
+import SignUpPage
+import SignupScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -39,8 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tutorials.agriconnect.ui.theme.AgriconnectTheme
 
-
-
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,9 +62,9 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    LoginScreen()
+                    FarmersAppScreen()
 
-                }
+                    }
 
             }
 
@@ -85,6 +86,5 @@ class MainActivity : ComponentActivity() {
 
 fun APreview(){
 
-    LoginScreen()
-
+    FarmersAppScreen()
 }
