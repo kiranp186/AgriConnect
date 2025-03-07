@@ -299,43 +299,83 @@ fun TaskBar(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TaskBarItem(Icon(imageVector = Icons.Default.Home, contentDescription = null), Text("Home"), isSelected = true)
-        TaskBarItem(Icon(imageVector = Icons.Default.Refresh, contentDescription = null),Text("Categories"), isSelected = false)
-        TaskBarItem(Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null), Text("My Bookings"),isSelected = false)
-        TaskBarItem(Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null), Text("My Account"),isSelected = false)
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home",
+                    modifier = Modifier.size(28.dp),  // Bigger icon
+                    tint = Color.White  // Always white because selected
+                )
+            },
+            text = "Home",
+            isSelected = true
+        )
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Refresh,
+                    contentDescription = "Categories",
+                    modifier = Modifier.size(28.dp),  // Bigger icon
+                    tint = Color.Gray  // Gray when not selected
+                )
+            },
+            text = "Categories",
+            isSelected = false
+        )
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.ShoppingCart,
+                    contentDescription = "My Bookings",
+                    modifier = Modifier.size(28.dp),  // Bigger icon
+                    tint = Color.Gray  // Gray when not selected
+                )
+            },
+            text = "My Bookings",
+            isSelected = false
+        )
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "My Account",
+                    modifier = Modifier.size(28.dp),  // Bigger icon
+                    tint = Color.Gray  // Gray when not selected
+                )
+            },
+            text = "My Account",
+            isSelected = false
+        )
     }
 }
 
 @Composable
-fun TaskBarItem(Icon:Unit, Text: Unit, isSelected: Boolean) {
+fun TaskBarItem(
+    icon: @Composable () -> Unit,
+    text: String,
+    isSelected: Boolean
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(8.dp)
+            .padding(2.dp)
             .clickable { /* Handle task bar item click */ }
     ) {
-        // Icon placeholder
-//        Box(
-//            modifier = Modifier
-//                .size(24.dp)
-//                .background(
-//                    color = if (isSelected) Color.White else Color.Gray.copy(alpha = 0.5f),
-//                    shape = RoundedCornerShape(4.dp)
-//                )
-//        )
+        // Icon content
+        icon()
 
         Spacer(modifier = Modifier.height(4.dp))
 
         // Task name
         Text(
-            Text,
-            fontSize = 12.sp,
+            text = text,
+            fontSize = 14.sp,
             color = if (isSelected) Color.White else Color.Gray,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
         )
     }
 }
-
 @Composable
 private fun NewScrollableSection() {
     Column(
