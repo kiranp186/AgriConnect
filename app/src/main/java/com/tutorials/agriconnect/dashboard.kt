@@ -13,8 +13,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -238,7 +242,10 @@ fun SidebarOverlay(
                             Box(
                                 modifier = Modifier
                                     .size(24.dp)
-                                    .background(Color.Red.copy(alpha = 0.5f), RoundedCornerShape(4.dp))
+                                    .background(
+                                        Color.Red.copy(alpha = 0.5f),
+                                        RoundedCornerShape(4.dp)
+                                    )
                             )
                         }
                     )
@@ -292,15 +299,15 @@ fun TaskBar(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TaskBarItem(title = "Home", isSelected = true)
-        TaskBarItem(title = "Categories", isSelected = false)
-        TaskBarItem(title = "My Bookings", isSelected = false)
-        TaskBarItem(title = "Profile", isSelected = false)
+        TaskBarItem(Icon(imageVector = Icons.Default.Home, contentDescription = null), Text("Home"), isSelected = true)
+        TaskBarItem(Icon(imageVector = Icons.Default.Refresh, contentDescription = null),Text("Categories"), isSelected = false)
+        TaskBarItem(Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null), Text("My Bookings"),isSelected = false)
+        TaskBarItem(Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null), Text("My Account"),isSelected = false)
     }
 }
 
 @Composable
-fun TaskBarItem(title: String, isSelected: Boolean) {
+fun TaskBarItem(Icon:Unit, Text: Unit, isSelected: Boolean) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -308,20 +315,20 @@ fun TaskBarItem(title: String, isSelected: Boolean) {
             .clickable { /* Handle task bar item click */ }
     ) {
         // Icon placeholder
-        Box(
-            modifier = Modifier
-                .size(24.dp)
-                .background(
-                    color = if (isSelected) Color.White else Color.Gray.copy(alpha = 0.5f),
-                    shape = RoundedCornerShape(4.dp)
-                )
-        )
+//        Box(
+//            modifier = Modifier
+//                .size(24.dp)
+//                .background(
+//                    color = if (isSelected) Color.White else Color.Gray.copy(alpha = 0.5f),
+//                    shape = RoundedCornerShape(4.dp)
+//                )
+//        )
 
         Spacer(modifier = Modifier.height(4.dp))
 
         // Task name
         Text(
-            text = title,
+            Text,
             fontSize = 12.sp,
             color = if (isSelected) Color.White else Color.Gray,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
@@ -427,7 +434,8 @@ private fun CommoditiesSection() {
             Commodity("Ragi", R.drawable.ragi),
             Commodity("Wheat", R.drawable.wheat),
             Commodity("Potato", R.drawable.potato),
-            Commodity("Vegetables", R.drawable.vegetables)
+            Commodity("Vegetables", R.drawable.vegetables),
+            Commodity("Soyabean", R.drawable.soyabean)
         )
 
         // Define commodity items for second row with image resources
@@ -438,7 +446,9 @@ private fun CommoditiesSection() {
             Commodity("Cotton", R.drawable.cotton),
             Commodity("Groundnut", R.drawable.groundnut),
             Commodity("ChickPea", R.drawable.chickpea),
+            Commodity("Coconut", R.drawable.coconut),
             Commodity("Fruits", R.drawable.fruits)
+
         )
 
         // Create an infinite list by repeating the original list
@@ -496,7 +506,7 @@ private fun CommodityBox(commodity: Commodity) {
             Image(
                 painter = painterResource(id = commodity.imageResId),
                 contentDescription = commodity.name,
-                modifier = Modifier
+                modifier = Modifier//.fillMaxSize()    //for full size icon
                     .size(48.dp)
                     .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
