@@ -2,12 +2,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,26 +37,35 @@ fun FarmersAppScreen() {
         ) {
             Text(
                 text = "Hello, Farmers",
-                fontSize = 22.sp,
+                fontSize = 26.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
             )
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = "Sunday, 01 Dec 2024",
-                    fontSize = 14.sp,
-                    color = Color.White,
-                    modifier = Modifier.padding(end = 8.dp)
-                )
-                IconButton(onClick = { }) {
-                    // Replace with a simple Box instead of Icon with unresolved reference
-                    Box(
-                        modifier = Modifier
-                            .size(24.dp)
-                            .background(Color.White.copy(alpha = 0.3f), shape = RoundedCornerShape(12.dp))
-                    )
+            Row(verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Absolute.Right
+                ) {
+                Box(
+                    modifier = Modifier
+                        .size(150.dp, 24.dp)
+                        .background(Color(0xFF6B8E23), shape = RoundedCornerShape(4.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Row {
+                        Text(
+                            "Location",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(imageVector = Icons.Default.LocationOn, contentDescription = null,tint = Color.White)
+
+                        }
+                    }
                 }
+
+
             }
         }
 
@@ -73,7 +86,10 @@ fun FarmersAppScreen() {
                 Box(
                     modifier = Modifier
                         .size(24.dp)
-                        .background(Color.Gray.copy(alpha = 0.3f), shape = RoundedCornerShape(12.dp))
+                        .background(
+                            Color.Gray.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
@@ -86,7 +102,10 @@ fun FarmersAppScreen() {
                 Box(
                     modifier = Modifier
                         .size(24.dp)
-                        .background(Color.Gray.copy(alpha = 0.3f), shape = RoundedCornerShape(12.dp))
+                        .background(
+                            Color.Gray.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
                 )
             }
         }
@@ -144,7 +163,7 @@ private fun NewScrollableSection() {
             "Seasonal Crops"
         )
 
-        // Create an infinite list by repeating the original list
+        // Create an infinite list by repeating the original list - MOVED OUTSIDE LazyRow
         val infiniteList = remember {
             generateSequence { featuredItems }.flatten().take(1000).toList()
         }
@@ -224,16 +243,16 @@ private fun CommoditiesSection() {
             Commodity("Tomato")
         )
 
+        // Create an infinite list by repeating the original list - MOVED OUTSIDE LazyRow
+        val infiniteList1 = remember {
+            generateSequence { commoditiesRow1 }.flatten().take(1000).toList()
+        }
+
         // First row of commodities
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Create an infinite list by repeating the original list
-            val infiniteList1 = remember {
-                generateSequence { commoditiesRow1 }.flatten().take(1000).toList()
-            }
-
             items(infiniteList1.size) { index ->
                 val commodity = infiniteList1[index]
                 CommodityBox(commodity)
@@ -243,16 +262,16 @@ private fun CommoditiesSection() {
         // Add spacing between rows
         Spacer(modifier = Modifier.height(12.dp))
 
+        // Create an infinite list by repeating the original list - MOVED OUTSIDE LazyRow
+        val infiniteList2 = remember {
+            generateSequence { commoditiesRow2 }.flatten().take(1000).toList()
+        }
+
         // Second row of commodities
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Create an infinite list by repeating the original list
-            val infiniteList2 = remember {
-                generateSequence { commoditiesRow2 }.flatten().take(1000).toList()
-            }
-
             items(infiniteList2.size) { index ->
                 val commodity = infiniteList2[index]
                 CommodityBox(commodity)
@@ -278,7 +297,10 @@ private fun CommodityBox(commodity: Commodity) {
             Box(
                 modifier = Modifier
                     .size(40.dp)
-                    .background(Color.LightGray.copy(alpha = 0.5f), shape = RoundedCornerShape(8.dp))
+                    .background(
+                        Color.LightGray.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(8.dp)
+                    )
             )
         }
 
@@ -344,10 +366,7 @@ private data class Commodity(
 )
 
 @Preview(showBackground=true)
-
 @Composable
-
 fun Preview(){
-
     FarmersAppScreen()
 }
