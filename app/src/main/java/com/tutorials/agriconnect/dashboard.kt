@@ -1,7 +1,10 @@
+package com.tutorials.agriconnect
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -19,8 +22,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,8 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 
 /**
- * A complete Farmers App screen component that matches the provided UI design
- * with added sidebar and persistent task bar
+ * A complete Farmers App screen component with added commodity images
  */
 @Composable
 fun FarmersAppScreen() {
@@ -418,18 +420,25 @@ private fun CommoditiesSection() {
             modifier = Modifier.padding(bottom = 12.dp)
         )
 
-        // Define commodity items for first row
+        // Define commodity items for first row with image resources
         val commoditiesRow1 = listOf(
-            Commodity("Rice"),
-            Commodity("Corn"),
-            Commodity("Grapes")
+            Commodity("Rice", R.drawable.rice),
+            Commodity("Corn", R.drawable.corn),
+            Commodity("Ragi", R.drawable.ragi),
+            Commodity("Wheat", R.drawable.wheat),s
+            Commodity("Potato", R.drawable.potato),
+            Commodity("Vegetables", R.drawable.vegetables)
         )
 
-        // Define commodity items for second row
+        // Define commodity items for second row with image resources
         val commoditiesRow2 = listOf(
-            Commodity("Potato"),
-            Commodity("Olive"),
-            Commodity("Tomato")
+            Commodity("Ginger", R.drawable.ginger),
+            Commodity("Areca nut", R.drawable.areca_nut),
+            Commodity("Sugarcane", R.drawable.sugarcane),
+            Commodity("Cotton", R.drawable.cotton),
+            Commodity("Groundnut", R.drawable.groundnut),
+            Commodity("ChickPea", R.drawable.chickpea),
+            Commodity("Fruits", R.drawable.fruits)
         )
 
         // Create an infinite list by repeating the original list
@@ -475,6 +484,7 @@ private fun CommodityBox(commodity: Commodity) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.width(64.dp)
     ) {
+        // Image container with white background
         Box(
             modifier = Modifier
                 .size(64.dp)
@@ -482,14 +492,14 @@ private fun CommodityBox(commodity: Commodity) {
                 .background(Color.White),
             contentAlignment = Alignment.Center
         ) {
-            // Placeholder for image
-            Box(
+            // Load the actual image
+            Image(
+                painter = painterResource(id = commodity.imageResId),
+                contentDescription = commodity.name,
                 modifier = Modifier
-                    .size(40.dp)
-                    .background(
-                        Color.LightGray.copy(alpha = 0.5f),
-                        shape = RoundedCornerShape(8.dp)
-                    )
+                    .size(48.dp)
+                    .clip(RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop
             )
         }
 
@@ -530,10 +540,11 @@ private fun MyFieldsSection() {
 }
 
 /**
- * A data class representing a commodity with just a name
+ * A data class representing a commodity with a name and image resource
  */
 private data class Commodity(
-    val name: String
+    val name: String,
+    val imageResId: Int
 )
 
 @Preview(showBackground = true)
