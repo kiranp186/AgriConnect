@@ -425,7 +425,7 @@ private fun CommoditiesSection() {
             Commodity("Rice", R.drawable.rice),
             Commodity("Corn", R.drawable.corn),
             Commodity("Ragi", R.drawable.ragi),
-            Commodity("Wheat", R.drawable.wheat),s
+            Commodity("Wheat", R.drawable.wheat),
             Commodity("Potato", R.drawable.potato),
             Commodity("Vegetables", R.drawable.vegetables)
         )
