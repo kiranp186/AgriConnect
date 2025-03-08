@@ -193,6 +193,12 @@ fun SidebarOverlay(
     isVisible: Boolean,
     onDismiss: () -> Unit
 ) {
+    // Track if the language dropdown is expanded
+    var isLanguageDropdownExpanded by remember { mutableStateOf(false) }
+
+    // Track the selected language
+    var selectedLanguage by remember { mutableStateOf("English") }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -239,23 +245,109 @@ fun SidebarOverlay(
                     )
 
                     // Sidebar menu items
-                    SidebarMenuItem(title = "My Account"
-                    ) { Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null) }
-                    SidebarMenuItem(title = "Languages"
-                    ) { Icon(imageVector = Icons.Default.Face, contentDescription = null) }
-                    SidebarMenuItem(title = "Wish List"
-                    ) { Icon(imageVector = Icons.Default.Favorite, contentDescription = null) }
-                    SidebarMenuItem(title = "My Bookings"
-                    ) { Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null) }
-                    SidebarMenuItem(title = "Blogs"
-                    ) { Icon(imageVector = Icons.Default.MailOutline, contentDescription = null) }
+                    SidebarMenuItem(
+                        title = "My Account"
+                    ) {
+                        Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+                    }
+
+                    // Language menu item with dropdown
+                    Box(
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 12.dp)
+                                .clickable { isLanguageDropdownExpanded = true },
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Face,
+                                contentDescription = "Languages",
+                                tint = Color.White
+                            )
+
+                            Spacer(modifier = Modifier.width(16.dp))
+
+                            Text(
+                                text = "Languages ($selectedLanguage)",
+                                fontSize = 16.sp,
+                                color = Color.White
+                            )
+
+                            Spacer(modifier = Modifier.weight(1f))
+
+
+                        }
+
+                        // Language dropdown menu
+                        DropdownMenu(
+                            expanded = isLanguageDropdownExpanded,
+                            onDismissRequest = { isLanguageDropdownExpanded = false },
+                            modifier = Modifier
+                                .background(Color(0xFF3A4F11))
+                                .width(200.dp)
+                        ) {
+                            // English option
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        text = "English",
+                                        color = if (selectedLanguage == "English")
+                                            Color.White else Color.White.copy(alpha = 0.7f),
+                                        fontWeight = if (selectedLanguage == "English")
+                                            FontWeight.Bold else FontWeight.Normal
+                                    )
+                                },
+                                onClick = {
+                                    selectedLanguage = "English"
+                                    isLanguageDropdownExpanded = false
+                                }
+                            )
+
+                            // Kannada option
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        text = "Kannada",
+                                        color = if (selectedLanguage == "Kannada")
+                                            Color.White else Color.White.copy(alpha = 0.7f),
+                                        fontWeight = if (selectedLanguage == "Kannada")
+                                            FontWeight.Bold else FontWeight.Normal
+                                    )
+                                },
+                                onClick = {
+                                    selectedLanguage = "Kannada"
+                                    isLanguageDropdownExpanded = false
+                                }
+                            )
+                        }
+                    }
+
+                    SidebarMenuItem(
+                        title = "Wish List"
+                    ) {
+                        Icon(imageVector = Icons.Default.Favorite, contentDescription = null)
+                    }
+
+                    SidebarMenuItem(
+                        title = "My Bookings"
+                    ) {
+                        Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null)
+                    }
+
+                    SidebarMenuItem(
+                        title = "Blogs"
+                    ) {
+                        Icon(imageVector = Icons.Default.MailOutline, contentDescription = null)
+                    }
 
                     Spacer(modifier = Modifier.weight(1f))
 
                     // Logout at the bottom
                     SidebarMenuItem(
                         title = "Logout"
-
                     ) {
                         Icon(
                             imageVector = Icons.Default.ExitToApp,
@@ -300,7 +392,6 @@ fun SidebarMenuItem(
         )
     }
 }
-
 @Composable
 fun TaskBar(modifier: Modifier = Modifier) {
     // Track the selected index
@@ -627,30 +718,142 @@ private fun CommodityBox(commodity: Commodity) {
 
 @Composable
 private fun MyFieldsSection() {
+    // Combined list of all crops from both commodity rows
+    val allCrops = listOf(
+        "Rice", "Corn", "Ragi", "Wheat", "Potato", "Vegetable", "Soyabean",
+        "Ginger", "Areca nut", "Sugarcane", "Cotton", "Groundnut", "ChickPea", "Coconut", "Fruits"
+    )
+
+    // State for dropdown expanded status
+    var isDropdownExpanded by remember { mutableStateOf(false) }
+
+    // State for selected crop - null means no selection yet
+    var selectedCrop by remember { mutableStateOf<String?>(null) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        Text(
-            text = "My Fields",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.padding(bottom = 12.dp)
-        )
+        // Title and dropdown row
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            // Section title
+            Text(
+                text = "My Fields",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
 
-        // Empty section as requested
+            // Crop Selection Dropdown
+            Box {
+                // Dropdown trigger button
+                Button(
+                    onClick = { isDropdownExpanded = true },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.White,
+                        contentColor = Color(0xFF4A6118)
+                    ),
+                    shape = RoundedCornerShape(8.dp),
+                    modifier = Modifier.height(36.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Text(
+                            text = selectedCrop ?: "Select crop",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                        // Dropdown icon
+                        Icon(
+                            imageVector = Icons.Default.List,
+                            contentDescription = "Select Crop",
+                            modifier = Modifier.size(16.dp)
+                        )
+                    }
+                }
+
+                // Dropdown menu
+                DropdownMenu(
+                    expanded = isDropdownExpanded,
+                    onDismissRequest = { isDropdownExpanded = false },
+                    modifier = Modifier
+                        .background(Color.White)
+                        .width(180.dp)
+                ) {
+                    allCrops.forEach { crop ->
+                        DropdownMenuItem(
+                            text = {
+                                Text(
+                                    text = crop,
+                                    fontSize = 14.sp,
+                                    color = if (crop == selectedCrop) Color(0xFF4A6118) else Color.Black
+                                )
+                            },
+                            onClick = {
+                                selectedCrop = crop
+                                isDropdownExpanded = false
+                            },
+                            colors = MenuDefaults.itemColors(
+                                textColor = Color.Black
+                            )
+                        )
+                    }
+                }
+            }
+        }
+
+        // Fields display area
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(120.dp)
                 .clip(RoundedCornerShape(12.dp))
-                .background(Color(0x22FFFFFF))
-        )
+                .background(Color(0x22FFFFFF)),
+            contentAlignment = Alignment.Center
+        ) {
+            // Display based on whether a crop is selected
+            if (selectedCrop != null) {
+                // Show the selected crop info
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = selectedCrop!!,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Field information for $selectedCrop will be displayed here",
+                        fontSize = 14.sp,
+                        color = Color.White.copy(alpha = 0.8f),
+                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = 16.dp)
+                    )
+                }
+            } else {
+                // Show prompt to select a crop
+                Text(
+                    text = "Please select a crop to view field information",
+                    fontSize = 14.sp,
+                    color = Color.White.copy(alpha = 0.8f),
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
+        }
     }
 }
-
 /**
  * A data class representing a commodity with a name and image resource
  */
