@@ -17,7 +17,6 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -34,6 +33,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.input.pointer.pointerInput
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 
 /**
  * A complete Farmers App screen component with added commodity images
@@ -190,7 +201,7 @@ fun SidebarOverlay(
         // Semi-transparent background when sidebar is visible
         if (isVisible) {
             Box(
-                modifier = Modifier 
+                modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.5f))
                     .clickable { onDismiss() }
@@ -228,28 +239,30 @@ fun SidebarOverlay(
                     )
 
                     // Sidebar menu items
-                    SidebarMenuItem(title = "My Account")
-                    SidebarMenuItem(title = "Languages")
-                    SidebarMenuItem(title = "Wish List")
-                    SidebarMenuItem(title = "My Bookings")
-                    SidebarMenuItem(title = "Blogs")
+                    SidebarMenuItem(title = "My Account"
+                    ) { Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null) }
+                    SidebarMenuItem(title = "Languages"
+                    ) { Icon(imageVector = Icons.Default.Face, contentDescription = null) }
+                    SidebarMenuItem(title = "Wish List"
+                    ) { Icon(imageVector = Icons.Default.Favorite, contentDescription = null) }
+                    SidebarMenuItem(title = "My Bookings"
+                    ) { Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null) }
+                    SidebarMenuItem(title = "Blogs"
+                    ) { Icon(imageVector = Icons.Default.MailOutline, contentDescription = null) }
 
                     Spacer(modifier = Modifier.weight(1f))
 
                     // Logout at the bottom
                     SidebarMenuItem(
-                        title = "Logout",
-                        iconBox = {
-                            Box(
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .background(
-                                        Color.Red.copy(alpha = 0.5f),
-                                        RoundedCornerShape(4.dp)
-                                    )
-                            )
-                        }
-                    )
+                        title = "Logout"
+
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ExitToApp,
+                            contentDescription = null,
+                            tint = Color.Red
+                        )
+                    }
                 }
             }
         }
@@ -259,7 +272,7 @@ fun SidebarOverlay(
 @Composable
 fun SidebarMenuItem(
     title: String,
-    iconBox: @Composable () -> Unit = {
+    icon: @Composable () -> Unit = {
         Box(
             modifier = Modifier
                 .size(24.dp)
@@ -274,8 +287,8 @@ fun SidebarMenuItem(
             .clickable { /* Handle menu item click */ },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Icon placeholder
-        iconBox()
+        // Icon content
+        icon()
 
         Spacer(modifier = Modifier.width(16.dp))
 
@@ -423,8 +436,41 @@ private fun NewScrollableSection() {
             generateSequence { featuredItems }.flatten().take(1000).toList()
         }
 
+        // Auto-scrolling implementation
+        val listState = rememberLazyListState()
+        val coroutineScope = rememberCoroutineScope()
+
+        // Auto-scroll timer effect
+        LaunchedEffect(Unit) {
+            var currentIndex = 0
+            while (isActive) {
+                delay(3000) // 3 seconds delay between scrolls
+                currentIndex = (currentIndex + 1) % infiniteList.size
+                // Smooth scroll to the next item
+                listState.animateScrollToItem(
+                    index = currentIndex,
+                    scrollOffset = 0
+                )
+            }
+        }
+
+        // Add manual scrolling pause/resume
+        var isAutoScrollPaused by remember { mutableStateOf(false) }
+
+        // The LazyRow with controlled state
         LazyRow(
-            modifier = Modifier.fillMaxWidth(),
+            state = listState,
+            modifier = Modifier
+                .fillMaxWidth()
+                // Pause auto-scrolling when user is interacting
+                .pointerInput(Unit) {
+                    detectDragGestures(
+                        onDragStart = { isAutoScrollPaused = true },
+                        onDragEnd = { isAutoScrollPaused = false },
+                        onDragCancel = { isAutoScrollPaused = false },
+                        onDrag = { _, _ -> }
+                    )
+                },
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(infiniteList.size) { index ->
@@ -468,7 +514,6 @@ private fun FeaturedBox(title: String) {
         }
     }
 }
-
 @Composable
 private fun CommoditiesSection() {
     Column(
@@ -491,7 +536,7 @@ private fun CommoditiesSection() {
             Commodity("Ragi", R.drawable.ragi),
             Commodity("Wheat", R.drawable.wheat),
             Commodity("Potato", R.drawable.potato),
-            Commodity("Vegetables", R.drawable.vegetables),
+            Commodity("Vegetable", R.drawable.vegetables),
             Commodity("Soyabean", R.drawable.soyabean)
         )
 
