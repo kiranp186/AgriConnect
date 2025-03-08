@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -189,7 +190,7 @@ fun SidebarOverlay(
         // Semi-transparent background when sidebar is visible
         if (isVisible) {
             Box(
-                modifier = Modifier
+                modifier = Modifier 
                     .fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.5f))
                     .clickable { onDismiss() }
@@ -289,6 +290,9 @@ fun SidebarMenuItem(
 
 @Composable
 fun TaskBar(modifier: Modifier = Modifier) {
+    // Track the selected index
+    var selectedIndex by remember { mutableStateOf(0) }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -299,53 +303,65 @@ fun TaskBar(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        // Home
         TaskBarItem(
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
                     contentDescription = "Home",
-                    modifier = Modifier.size(28.dp),  // Bigger icon
-                    tint = Color.White  // Always white because selected
+                    modifier = Modifier.size(28.dp),
+                    tint = if (selectedIndex == 0) Color.White else Color.Gray
                 )
             },
             text = "Home",
-            isSelected = true
+            isSelected = selectedIndex == 0,
+            onClick = { selectedIndex = 0 }
         )
+
+        // Categories
         TaskBarItem(
             icon = {
-                Icon(
-                    imageVector = Icons.Default.Refresh,
+                // Custom icon from the provided PNG resource
+                Image(
+                    painter = painterResource(id = R.drawable.categories_icon),
                     contentDescription = "Categories",
-                    modifier = Modifier.size(28.dp),  // Bigger icon
-                    tint = Color.Gray  // Gray when not selected
+                    modifier = Modifier.size(24.dp),
+                    colorFilter = ColorFilter.tint(if (selectedIndex == 1) Color.White else Color.Gray)
                 )
             },
             text = "Categories",
-            isSelected = false
+            isSelected = selectedIndex == 1,
+            onClick = { selectedIndex = 1 }
         )
+
+        // My Bookings
         TaskBarItem(
             icon = {
                 Icon(
                     imageVector = Icons.Default.ShoppingCart,
                     contentDescription = "My Bookings",
-                    modifier = Modifier.size(28.dp),  // Bigger icon
-                    tint = Color.Gray  // Gray when not selected
+                    modifier = Modifier.size(28.dp),
+                    tint = if (selectedIndex == 2) Color.White else Color.Gray
                 )
             },
             text = "My Bookings",
-            isSelected = false
+            isSelected = selectedIndex == 2,
+            onClick = { selectedIndex = 2 }
         )
+
+        // My Account
         TaskBarItem(
             icon = {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = "My Account",
-                    modifier = Modifier.size(28.dp),  // Bigger icon
-                    tint = Color.Gray  // Gray when not selected
+                    modifier = Modifier.size(28.dp),
+                    tint = if (selectedIndex == 3) Color.White else Color.Gray
                 )
             },
             text = "My Account",
-            isSelected = false
+            isSelected = selectedIndex == 3,
+            onClick = { selectedIndex = 3 }
         )
     }
 }
@@ -354,13 +370,14 @@ fun TaskBar(modifier: Modifier = Modifier) {
 fun TaskBarItem(
     icon: @Composable () -> Unit,
     text: String,
-    isSelected: Boolean
+    isSelected: Boolean,
+    onClick: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(2.dp)
-            .clickable { /* Handle task bar item click */ }
+            .clickable(onClick = onClick)
     ) {
         // Icon content
         icon()
