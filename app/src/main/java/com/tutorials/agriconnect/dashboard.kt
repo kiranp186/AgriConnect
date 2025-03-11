@@ -402,7 +402,7 @@ fun TaskBar(modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .height(72.dp)
             .shadow(8.dp)
-            .background(Color(0xFF2D3A0F))
+            .background(Color.White)
             .padding(horizontal = 8.dp),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
@@ -429,7 +429,7 @@ fun TaskBar(modifier: Modifier = Modifier) {
                 Image(
                     painter = painterResource(id = R.drawable.categories_icon),
                     contentDescription = "Categories",
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.size(28.dp),
                     colorFilter = ColorFilter.tint(if (selectedIndex == 1) Color(0xFF4CAF50) else Color.Gray)
                 )
             },
@@ -492,7 +492,7 @@ fun TaskBarItem(
         Text(
             text = text,
             fontSize = 14.sp,
-            color = if (isSelected) Color.White else Color.Gray,
+            color = if (isSelected) Color(0xFF4CAF50) else Color.Gray,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
         )
     }
