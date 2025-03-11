@@ -414,7 +414,7 @@ fun TaskBar(modifier: Modifier = Modifier) {
                     imageVector = Icons.Default.Home,
                     contentDescription = "Home",
                     modifier = Modifier.size(28.dp),
-                    tint = if (selectedIndex == 0) Color.White else Color.Gray
+                    tint = if (selectedIndex == 0) Color(0xFF4CAF50) else Color.Gray
                 )
             },
             text = "Home",
@@ -430,7 +430,7 @@ fun TaskBar(modifier: Modifier = Modifier) {
                     painter = painterResource(id = R.drawable.categories_icon),
                     contentDescription = "Categories",
                     modifier = Modifier.size(24.dp),
-                    colorFilter = ColorFilter.tint(if (selectedIndex == 1) Color.White else Color.Gray)
+                    colorFilter = ColorFilter.tint(if (selectedIndex == 1) Color(0xFF4CAF50) else Color.Gray)
                 )
             },
             text = "Categories",
@@ -445,7 +445,7 @@ fun TaskBar(modifier: Modifier = Modifier) {
                     imageVector = Icons.Default.ShoppingCart,
                     contentDescription = "My Bookings",
                     modifier = Modifier.size(28.dp),
-                    tint = if (selectedIndex == 2) Color.White else Color.Gray
+                    tint = if (selectedIndex == 2) Color(0xFF4CAF50) else Color.Gray
                 )
             },
             text = "My Bookings",
@@ -460,7 +460,7 @@ fun TaskBar(modifier: Modifier = Modifier) {
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = "My Account",
                     modifier = Modifier.size(28.dp),
-                    tint = if (selectedIndex == 3) Color.White else Color.Gray
+                    tint = if (selectedIndex == 3) Color(0xFF4CAF50) else Color.Gray
                 )
             },
             text = "My Account",

@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    FarmTechHomeScreen().FarmTechApp()
+                    FarmersAppScreen()
 
                     }
 
