@@ -217,7 +217,7 @@ fun SchemeItem(
 }
 @Preview
 @Composable
-fun Preview(){
+fun FarmerPreview(){
     // Replace with your actual theme name
 // This is the composable from your other file
     fun FarmerProfileScreen(){
