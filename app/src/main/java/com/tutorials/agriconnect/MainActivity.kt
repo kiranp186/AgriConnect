@@ -2,6 +2,7 @@ package com.tutorials.agriconnect
 
 
 
+import LoginScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    FarmersAppScreen()
+                    FarmerProfileScreen()
 
                     }
 
@@ -57,5 +58,5 @@ class MainActivity : ComponentActivity() {
 
 fun APreview(){
 
-    FarmersAppScreen()
+    FarmerProfileScreen()
 }
