@@ -57,5 +57,5 @@ class MainActivity : ComponentActivity() {
 
 fun APreview(){
 
-    FarmersAppScreen()
+    EquipmentDetailPage()
 }
