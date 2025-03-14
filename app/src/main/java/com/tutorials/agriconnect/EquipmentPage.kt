@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +35,12 @@ import kotlin.math.min
 @Composable
 fun EquipmentDetailPage() {
     val scrollState = rememberScrollState()
+    val lazyRowState = rememberLazyListState()
+    val imageItems = (1..5).toList() // List of 5 images
+
+    // Track the current visible image index
+    val firstVisibleItemIndex by remember { derivedStateOf { lazyRowState.firstVisibleItemIndex } }
+    val currentImageIndex = firstVisibleItemIndex + 1
 
     // Calculate top bar opacity based on scroll position
     val topBarOpacity by remember {
@@ -61,39 +69,47 @@ fun EquipmentDetailPage() {
             ) {
                 // Scrollable image carousel
                 LazyRow(
-                    modifier = Modifier
-                        .fillMaxSize()
+                    state = lazyRowState,
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    items(5) { index ->
+                    items(imageItems) { index ->
                         Box(
                             modifier = Modifier
                                 .fillParentMaxWidth()
                                 .fillParentMaxHeight()
-                                .padding(horizontal = if (index > 0) 8.dp else 0.dp),
+                                .padding(horizontal = if (index > 1) 8.dp else 0.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             // Placeholder for equipment images
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .background(Color(0xFFEEEEEE))
-                            )
+                                    .background(Color(0xFFEEEEEE)),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                // Adding a placeholder text showing the image number
+                                Text(
+                                    text = "Image $index",
+                                    color = Color.Gray,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
                     }
                 }
 
-                // Image counter indicator
+                // Image counter indicator - now dynamic
                 Box(
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
                         .padding(bottom = 16.dp)
-                        .size(32.dp)
+                        .size(48.dp)
                         .clip(CircleShape)
                         .background(Color.Black.copy(alpha = 0.6f)),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "1/5",
+                        text = "$currentImageIndex/${imageItems.size}",
                         color = Color.White,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold
