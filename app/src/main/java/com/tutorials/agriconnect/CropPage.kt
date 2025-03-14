@@ -87,7 +87,7 @@ fun CropPage() {
                 // Crop Heading - No box around it, white text
                 Text(
                     text = "Rice",
-                    fontSize = 28.sp,
+                    fontSize = 32.sp,  // Slightly larger font
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic,
                     fontFamily = FontFamily.Serif,
@@ -100,10 +100,10 @@ fun CropPage() {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Equipment Detail Boxes using the style from MyFieldsSection
+                // Equipment Detail Boxes - now larger
                 repeat(3) {
                     EquipmentDetailBox(boxBackgroundColor)
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(24.dp))  // More space between boxes
                 }
             }
 
@@ -122,14 +122,14 @@ fun EquipmentDetailBox(backgroundColor: Color) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp)
-            .clip(RoundedCornerShape(12.dp))  // Using the same rounded corners as in MyFieldsSection
-            .background(backgroundColor),  // Using the semi-transparent white background
+            .height(160.dp)  // Increased from 120.dp to 160.dp
+            .clip(RoundedCornerShape(12.dp))
+            .background(backgroundColor),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = "Equipment details will be displayed here",
-            fontSize = 14.sp,
+            fontSize = 16.sp,  // Slightly larger text
             color = Color.White.copy(alpha = 0.8f),
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(horizontal = 16.dp)
