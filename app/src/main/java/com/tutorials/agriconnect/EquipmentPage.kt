@@ -1,7 +1,8 @@
 package com.tutorials.agriconnect
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -11,6 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Star
@@ -21,23 +23,50 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.zIndex
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.*
 import kotlin.math.max
 import kotlin.math.min
+
+// Mock data for available dates
+val availableDates = listOf(
+    LocalDate.now().plusDays(1),
+    LocalDate.now().plusDays(3),
+    LocalDate.now().plusDays(5),
+    LocalDate.now().plusDays(7),
+    LocalDate.now().plusDays(10),
+    LocalDate.now().plusDays(14)
+)
+
+// Mock data for available time slots
+val availableTimeSlots = listOf(
+    "09:00 AM - 11:00 AM",
+    "01:00 PM - 03:00 PM",
+    "04:00 PM - 06:00 PM"
+)
 
 @Composable
 fun EquipmentDetailPage() {
     val scrollState = rememberScrollState()
     val lazyRowState = rememberLazyListState()
     val imageItems = (1..5).toList() // List of 5 images
+    val coroutineScope = rememberCoroutineScope()
+
+    // State for calendar dialog
+    var showCalendarDialog by remember { mutableStateOf(false) }
+    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
+    var selectedTimeSlot by remember { mutableStateOf<String?>(null) }
 
     // Track the current visible image index
     val firstVisibleItemIndex by remember { derivedStateOf { lazyRowState.firstVisibleItemIndex } }
@@ -209,6 +238,7 @@ fun EquipmentDetailPage() {
                         text = "Location",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium,
+                        color = Color.Gray,
                         modifier = Modifier.padding(end = 8.dp)
                     )
 
@@ -239,6 +269,7 @@ fun EquipmentDetailPage() {
                     text = "Product Details",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
+                    color = Color.Gray,
                     modifier = Modifier.padding(top = 24.dp, bottom = 8.dp)
                 )
 
@@ -268,6 +299,7 @@ fun EquipmentDetailPage() {
                     Text(
                         text = "Review (50)",
                         fontSize = 18.sp,
+                        color = Color.Gray,
                         fontWeight = FontWeight.Bold
                     )
 
@@ -364,9 +396,9 @@ fun EquipmentDetailPage() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                // Chat button
+                // Available Slot button (replaced Chat button)
                 Button(
-                    onClick = { /* Handle chat */ },
+                    onClick = { showCalendarDialog = true },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White,
                         contentColor = Color(0xFF4CAF50)
@@ -376,11 +408,24 @@ fun EquipmentDetailPage() {
                         .weight(1f)
                         .height(56.dp)
                 ) {
-                    Text(
-                        text = "Chat",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium
-                    )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.DateRange,
+                            contentDescription = "Calendar",
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            text = selectedDate?.let {
+                                it.format(DateTimeFormatter.ofPattern("dd MMM"))
+                            } ?: "Available Slot",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
                 }
 
                 // Book Now button
@@ -392,7 +437,8 @@ fun EquipmentDetailPage() {
                     ),
                     modifier = Modifier
                         .weight(2f)
-                        .height(56.dp)
+                        .height(56.dp),
+                    enabled = selectedDate != null && selectedTimeSlot != null
                 ) {
                     Text(
                         text = "Book Now",
@@ -401,6 +447,299 @@ fun EquipmentDetailPage() {
                     )
                 }
             }
+        }
+
+        // Calendar Dialog
+// Calendar Dialog
+        if (showCalendarDialog) {
+            Dialog(onDismissRequest = { showCalendarDialog = false }) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .padding(16.dp),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                    ) {
+                        Text(
+                            text = "Select Date",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+
+                        // Calendar View
+                        CalendarView(
+                            availableDates = availableDates,
+                            onDateSelected = { date ->
+                                selectedDate = date
+                                // Reset time slot when date changes
+                                selectedTimeSlot = null
+                            }
+                        )
+
+                        // Only show time slots if a date is selected
+                        selectedDate?.let { date ->
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = "Available Time Slots",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(vertical = 8.dp)
+                            )
+
+                            Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                availableTimeSlots.forEach { timeSlot ->
+                                    TimeSlotItem(
+                                        timeSlot = timeSlot,
+                                        isSelected = timeSlot == selectedTimeSlot,
+                                        onSelected = {
+                                            selectedTimeSlot = timeSlot
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            TextButton(
+                                onClick = { showCalendarDialog = false }
+                            ) {
+                                Text("Cancel")
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Button(
+                                onClick = {
+                                    // Close dialog only if a time slot is selected
+                                    if (selectedTimeSlot != null) {
+                                        showCalendarDialog = false
+                                    }
+                                },
+                                enabled = selectedTimeSlot != null,
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFF4CAF50)
+                                )
+                            ) {
+                                Text("Confirm")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CalendarView(
+    availableDates: List<LocalDate>,
+    onDateSelected: (LocalDate) -> Unit
+) {
+    var currentMonth by remember { mutableStateOf(YearMonth.now()) }
+    var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        // Month navigation
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = {
+                    currentMonth = currentMonth.minusMonths(1)
+                }
+            ) {
+                Text("<", fontWeight = FontWeight.Bold)
+            }
+
+            Text(
+                text = currentMonth.format(DateTimeFormatter.ofPattern("MMMM yyyy")),
+                fontWeight = FontWeight.Medium
+            )
+
+            IconButton(
+                onClick = {
+                    currentMonth = currentMonth.plusMonths(1)
+                }
+            ) {
+                Text(">", fontWeight = FontWeight.Bold)
+            }
+        }
+
+        // Day of week headers
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            for (day in DayOfWeek.values()) {
+                Text(
+                    text = day.getDisplayName(TextStyle.SHORT, Locale.getDefault()).take(1),
+                    modifier = Modifier.weight(1f),
+                    textAlign = TextAlign.Center,
+                    fontSize = 14.sp,
+                    color = Color.Gray
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Calendar grid
+        val firstDayOfMonth = currentMonth.atDay(1)
+        val firstCalendarDay = firstDayOfMonth.minusDays(firstDayOfMonth.dayOfWeek.value.toLong() % 7)
+        val lastDayOfMonth = currentMonth.atEndOfMonth()
+
+        Column(modifier = Modifier.fillMaxWidth()) {
+            var currentDay = firstCalendarDay
+
+            // Calendar weeks (max 6 weeks)
+            repeat(6) { weekIndex ->
+                if (currentDay.isAfter(lastDayOfMonth) && weekIndex > 0) {
+                    // Skip rendering empty weeks after month end
+                    return@repeat
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    // Days in a week
+                    repeat(7) { _ ->
+                        val day = currentDay
+                        val isCurrentMonth = day.month == currentMonth.month
+                        val isAvailable = availableDates.contains(day)
+                        val isSelected = day == selectedDate
+
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .aspectRatio(1f)
+                                .padding(4.dp)
+                                .clip(CircleShape)
+                                .background(
+                                    when {
+                                        isSelected -> Color(0xFF4CAF50)
+                                        isAvailable && isCurrentMonth -> Color(0xFFE8F5E9)
+                                        else -> Color.Transparent
+                                    }
+                                )
+                                .clickable(
+                                    enabled = isAvailable && isCurrentMonth,
+                                    onClick = {
+                                        selectedDate = day
+                                        onDateSelected(day)
+                                    }
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = day.dayOfMonth.toString(),
+                                color = when {
+                                    isSelected -> Color.White
+                                    !isCurrentMonth -> Color.LightGray
+                                    isAvailable -> Color(0xFF4CAF50)
+                                    else -> Color.Gray
+                                },
+                                fontSize = 14.sp,
+                                fontWeight = if (isAvailable || isSelected) FontWeight.Bold else FontWeight.Normal
+                            )
+                        }
+
+                        currentDay = currentDay.plusDays(1)
+                    }
+                }
+            }
+        }
+
+        // Calendar legend
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(12.dp)
+                    .background(Color(0xFF4CAF50), CircleShape)
+            )
+
+            Text(
+                text = "Available",
+                modifier = Modifier.padding(start = 4.dp, end = 16.dp),
+                fontSize = 12.sp,
+                color = Color(0xFF4CAF50)
+            )
+
+            Box(
+                modifier = Modifier
+                    .size(12.dp)
+                    .background(Color.LightGray, CircleShape)
+            )
+
+            Text(
+                text = "Unavailable",
+                modifier = Modifier.padding(start = 4.dp),
+                fontSize = 12.sp,
+                color = Color.Gray
+            )
+        }
+    }
+}
+
+@Composable
+fun TimeSlotItem(
+    timeSlot: String,
+    isSelected: Boolean,
+    onSelected: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onSelected() },
+        colors = CardDefaults.cardColors(
+            containerColor = if (isSelected) Color(0xFFE8F5E9) else Color.White
+        ),
+        border = BorderStroke(
+            width = 1.dp,
+            color = if (isSelected) Color(0xFF4CAF50) else Color.LightGray
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RadioButton(
+                selected = isSelected,
+                onClick = { onSelected() },
+                colors = RadioButtonDefaults.colors(
+                    selectedColor = Color(0xFF4CAF50)
+                )
+            )
+
+            Text(
+                text = timeSlot,
+                modifier = Modifier.padding(start = 8.dp),
+                fontWeight = if (isSelected) FontWeight.Medium else FontWeight.Normal
+            )
         }
     }
 }
@@ -467,3 +806,4 @@ fun ReviewItem(
         )
     }
 }
+
