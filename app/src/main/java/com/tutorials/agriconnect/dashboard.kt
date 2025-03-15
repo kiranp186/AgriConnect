@@ -46,6 +46,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
+
 /**
  * A complete Farmers App screen component with added commodity images
  */
@@ -497,6 +498,8 @@ fun TaskBarItem(
         )
     }
 }
+
+
 @Composable
 private fun NewScrollableSection() {
     Column(
@@ -512,14 +515,14 @@ private fun NewScrollableSection() {
             modifier = Modifier.padding(bottom = 12.dp)
         )
 
-        // Define items for the new section
+        // Define items for the new section with titles and image resources
         val featuredItems = listOf(
-            "Weather Updates",
-            "Market Prices",
-            "Farming Tips",
-            "Equipment Rental",
-            "Community News",
-            "Seasonal Crops"
+            FeaturedItem("Sowing Machine", R.drawable.sowingmachine),
+            FeaturedItem("Market Prices", R.drawable.preparation),
+            FeaturedItem("Farming Tips", R.drawable.tract3),
+            FeaturedItem("Equipment Rental", R.drawable.sowing1),
+            FeaturedItem("Community News", R.drawable.harvester1),
+            FeaturedItem("Seasonal Crops", R.drawable.special2)
         )
 
         // Create an infinite list by repeating the original list
@@ -573,38 +576,48 @@ private fun NewScrollableSection() {
 }
 
 @Composable
-private fun FeaturedBox(title: String) {
+private fun FeaturedBox(item: FeaturedItem) {
     Box(
         modifier = Modifier
             .width(320.dp)
             .height(200.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(Color(0x55FFFFFF)),
-        contentAlignment = Alignment.Center
+            .shadow(4.dp)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.padding(8.dp)
+        // Display the actual image with content scale
+        Image(
+            painter = painterResource(id = item.imageResId),
+            contentDescription = item.title,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+
+        // Semi-transparent overlay at the bottom for text
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .fillMaxWidth()
+                .background(Color.Black.copy(alpha = 0.5f))
+                .padding(8.dp)
         ) {
-            // Placeholder for image/icon
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .background(Color.White, shape = RoundedCornerShape(8.dp))
-            )
-
-            Spacer(modifier = Modifier.height(8.dp))
-
             Text(
-                text = title,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
-                color = Color.White
+                text = item.title,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier.align(Alignment.Center)
             )
         }
     }
 }
+
+/**
+ * A data class representing a featured item with a title and image resource
+ */
+private data class FeaturedItem(
+    val title: String,
+    val imageResId: Int
+)
 @Composable
 private fun CommoditiesSection() {
     Column(

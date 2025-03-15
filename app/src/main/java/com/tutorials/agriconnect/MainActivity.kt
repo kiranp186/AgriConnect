@@ -2,6 +2,8 @@ package com.tutorials.agriconnect
 
 
 
+import LoginScreen
+import SignupScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -33,9 +35,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    EquipmentDetailPage()
-
-                    }
+                    FarmersAppScreen()                 }
 
             }
 
@@ -57,5 +57,5 @@ class MainActivity : ComponentActivity() {
 
 fun APreview(){
 
-    FarmersAppScreen()
+    CropPage()
 }
