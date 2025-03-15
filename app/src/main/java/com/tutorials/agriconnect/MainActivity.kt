@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    EquipmentDetailPage()
+                    FarmTechHomeScreen().FarmTechApp()
                 }
 
             }
