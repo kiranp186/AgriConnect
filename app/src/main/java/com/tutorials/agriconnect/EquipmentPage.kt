@@ -1,6 +1,7 @@
 package com.tutorials.agriconnect
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -111,19 +113,11 @@ fun EquipmentDetailPage() {
                             contentAlignment = Alignment.Center
                         ) {
                             // Placeholder for equipment images
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .background(Color(0xFFEEEEEE)),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                // Adding a placeholder text showing the image number
-                                Text(
-                                    text = "Image $index",
-                                    color = Color.Gray,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
+                            Image(
+                                painterResource(id = R.drawable.tract3),
+                                contentDescription = "Equipment Image",
+                                modifier = Modifier.fillMaxSize()
+                            )
                         }
                     }
                 }
@@ -220,7 +214,7 @@ fun EquipmentDetailPage() {
 
                 // Price
                 Text(
-                    text = "₹ 16,80,590",
+                    text = "₹ 5000",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF4CAF50),
@@ -256,7 +250,7 @@ fun EquipmentDetailPage() {
                         )
 
                         Text(
-                            text = "Bangalore, Karnataka",
+                            text = "Hassan, Karnataka",
                             fontSize = 14.sp,
                             color = Color.Gray,
                             modifier = Modifier.padding(start = 4.dp)
@@ -315,7 +309,7 @@ fun EquipmentDetailPage() {
                 ReviewItem(
                     name = "Monur Rahman",
                     timePosted = "Today",
-                    reviewText = "Tractor exceeded my expectations with its powerful performance, robust build, and advanced features. The spacious cabin and intuitive controls make it a pleasure to drive, while its..."
+                    reviewText = "The owner was professional and prompt, delivering the tractor on time and in well-maintained condition. The booking process was smooth..."
                 )
 
                 // Review Images
