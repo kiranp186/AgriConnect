@@ -1,5 +1,6 @@
 package com.tutorials.agriconnect
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -24,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -40,6 +44,13 @@ fun CropPage() {
     // Using the same olive green background as in FarmersAppScreen
     val backgroundColor = Color(0xFF6B8E23)
     val boxBackgroundColor = Color(0x22FFFFFF) // Semi-transparent white as in MyFieldsSection
+
+    // Define equipment items with different images and names
+    val equipmentItems = listOf(
+        EquipmentItem("Moldboard Plow", R.drawable.moldboardplow),
+        EquipmentItem("Tractor", R.drawable.tract4),
+        EquipmentItem("Mini Maize harvester", R.drawable.miniharvester)
+    )
 
     Box(modifier = Modifier.fillMaxSize()) {
         // Fixed header at the top
@@ -87,7 +98,7 @@ fun CropPage() {
             ) {
                 // Crop Heading - No box around it, white text
                 Text(
-                    text = "Rice",
+                    text = "Maize",
                     fontSize = 32.sp,  // Slightly larger font
                     fontWeight = FontWeight.Bold,
                     fontStyle = FontStyle.Italic,
@@ -101,9 +112,9 @@ fun CropPage() {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Equipment Detail Boxes - now larger
-                repeat(3) {
-                    EquipmentDetailBox(boxBackgroundColor)
+                // Equipment Detail Boxes - now with different images
+                equipmentItems.forEachIndexed { index, item ->
+                    EquipmentDetailBox(boxBackgroundColor, item)
                     Spacer(modifier = Modifier.height(24.dp))  // More space between boxes
                 }
             }
@@ -118,22 +129,62 @@ fun CropPage() {
     }
 }
 
+/**
+ * Data class to hold equipment information
+ */
+data class EquipmentItem(
+    val name: String,
+    val imageResId: Int
+)
+
 @Composable
-fun EquipmentDetailBox(backgroundColor: Color) {
+fun EquipmentDetailBox(backgroundColor: Color, equipmentItem: EquipmentItem) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(160.dp)  // Increased from 120.dp to 160.dp
+            .height(160.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(backgroundColor),
         contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "Equipment details will be displayed here",
-            fontSize = 16.sp,  // Slightly larger text
-            color = Color.White.copy(alpha = 0.8f),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
+        // Full-width image with overlay text at bottom
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            // Image of equipment - filling the entire box
+            Image(
+                painter = painterResource(id = equipmentItem.imageResId),
+                contentDescription = equipmentItem.name,
+                contentScale = ContentScale.FillBounds,  // Adjust to fill width while maintaining aspect ratio
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(165.dp)
+            )
+
+            // Semi-transparent overlay for text at the bottom
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .background(Color.Black.copy(alpha = 0.5f))
+                    .padding(8.dp)
+            ) {
+                // Equipment name text
+                Text(
+                    text = equipmentItem.name,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewCrop() {
+    CropPage()
 }

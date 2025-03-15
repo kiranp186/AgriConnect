@@ -16,9 +16,13 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 
 @Composable
 fun MyBookings() {
@@ -81,6 +85,11 @@ fun MyBookings() {
                 // Current orders list
                 repeat(3) {
                     CurrentOrderItem(
+                        imageResId = when (it) {
+                            0 -> R.drawable.tract4
+                            1 -> R.drawable.tract5
+                            else -> R.drawable.tractor
+                        },
                         equipmentName = "Tractor ${it + 1}",
                         ownerName = "Owner Name ${it + 1}",
                         dateBooked = "March ${it + 5}, 2025"
@@ -109,8 +118,9 @@ fun MyBookings() {
 
                 // Past orders list
                 PastOrderItem(
+                    imageResId = R.drawable.harvester1,
                     equipmentName = "Harvester 1",
-                    ownerName = "John Smith",
+                    ownerName = "Rohan",
                     dateBooked = "February 20, 2025",
                     isCompleted = true
                 )
@@ -118,8 +128,9 @@ fun MyBookings() {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 PastOrderItem(
+                    imageResId = R.drawable.plow,
                     equipmentName = "Plough 2",
-                    ownerName = "Jane Doe",
+                    ownerName = "Sohan",
                     dateBooked = "February 15, 2025",
                     isCompleted = false
                 )
@@ -127,8 +138,9 @@ fun MyBookings() {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 PastOrderItem(
+                    imageResId = R.drawable.seeder,
                     equipmentName = "Seeder 3",
-                    ownerName = "David Johnson",
+                    ownerName = "Mahesh",
                     dateBooked = "February 10, 2025",
                     isCompleted = true
                 )
@@ -149,6 +161,7 @@ fun MyBookings() {
 
 @Composable
 fun CurrentOrderItem(
+    imageResId: Int,
     equipmentName: String,
     ownerName: String,
     dateBooked: String
@@ -167,21 +180,15 @@ fun CurrentOrderItem(
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Image placeholder
-            Box(
+            // Image of equipment instead of placeholder
+            Image(
+                painter = painterResource(id = imageResId),
+                contentDescription = equipmentName,
                 modifier = Modifier
                     .size(100.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color(0xFFE8F5E9)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "IMG",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
-                )
-            }
+                    .clip(RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop
+            )
 
             // Equipment details
             Column(
@@ -251,6 +258,7 @@ fun CurrentOrderItem(
 
 @Composable
 fun PastOrderItem(
+    imageResId: Int,
     equipmentName: String,
     ownerName: String,
     dateBooked: String,
@@ -270,21 +278,15 @@ fun PastOrderItem(
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Image placeholder
-            Box(
+            // Image of equipment instead of placeholder
+            Image(
+                painter = painterResource(id = imageResId),
+                contentDescription = equipmentName,
                 modifier = Modifier
                     .size(100.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color(0xFFE8F5E9)),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "IMG",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontStyle = androidx.compose.ui.text.font.FontStyle.Italic
-                )
-            }
+                    .clip(RoundedCornerShape(8.dp)),
+                contentScale = ContentScale.Crop
+            )
 
             // Equipment details
             Column(
@@ -359,4 +361,10 @@ fun PastOrderItem(
             }
         }
     }
+}
+
+@Preview(showBackground=true)
+@Composable
+fun PreviewBookings(){
+    MyBookings()
 }

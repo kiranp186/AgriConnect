@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
                 ) {
 
-                    FarmTechHomeScreen().FarmTechApp()            }
+                    MyBookings()    }
 
             }
 
@@ -57,5 +57,5 @@ class MainActivity : ComponentActivity() {
 
 fun APreview(){
 
-    CropPage()
+    MyBookings()
 }
