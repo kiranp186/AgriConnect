@@ -677,14 +677,14 @@ fun CalendarView(
             Box(
                 modifier = Modifier
                     .size(12.dp)
-                    .background(Color(0xFFE8F5E9), CircleShape)
+                    .background(Color(0xFF4CAF50), CircleShape)
             )
 
             Text(
                 text = "Available",
                 modifier = Modifier.padding(start = 4.dp, end = 16.dp),
                 fontSize = 12.sp,
-                color = Color.Gray
+                color = Color(0xFF4CAF50)
             )
 
             Box(
