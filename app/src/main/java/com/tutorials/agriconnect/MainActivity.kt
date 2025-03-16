@@ -27,7 +27,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainApp()
+                    CropSpecificScreen(
+                        cropName = "Rice",  // or whatever crop is selected
+                        onBackClick = { /* Your navigation*/}
+                    )
                 }
             }
         }
@@ -59,7 +62,7 @@ fun MainApp() {
             FarmTechHomeScreen().FarmTechApp(navController = navController, currentRoute = currentRoute)
         }
         composable(NavigationRoutes.MY_BOOKINGS) {
-            MyBookings(navController = navController, currentRoute = currentRoute)
+           // MyBookings(navController = navController, currentRoute = currentRoute)
         }
     }
 }
