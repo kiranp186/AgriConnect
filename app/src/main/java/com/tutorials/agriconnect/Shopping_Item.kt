@@ -34,6 +34,7 @@ import com.tutorials.agriconnect.R
 
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.TextFieldDefaults.outlinedTextFieldColors
+import androidx.navigation.NavHostController
 
 
 class FarmTechHomeScreen {
@@ -503,7 +504,129 @@ class FarmTechHomeScreen {
         }
     }
 }
+// Update the FarmTechApp class to accept NavController
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FarmTechHomeScreen.FarmTechApp(navController: NavHostController, currentRoute: String) {
+    val lightGreen = Color(0xFFE8F5E9)
 
+    Scaffold(
+        topBar = { AppTopBar() },
+        bottomBar = { BottomNavigationBar(navController = navController, currentRoute = currentRoute) },
+        containerColor = Color(0xFF6A8E22)
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 16.dp)
+        ) {
+            SearchBar()
+            Spacer(modifier = Modifier.height(16.dp))
+
+            CategorySection()
+            Spacer(modifier = Modifier.height(24.dp))
+
+            FeaturedProductsSection()
+            Spacer(modifier = Modifier.height(24.dp))
+
+            NewArrivalsSection()
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+    }
+}
+
+// Update BottomNavigationBar in FarmTechHomeScreen class
+@Composable
+private fun FarmTechHomeScreen.BottomNavigationBar(navController: NavHostController, currentRoute: String) {
+    Surface(
+        color = Color.White,
+        shadowElevation = 8.dp
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            BottomNavItem(
+                icon = Icons.Outlined.Home,
+                label = "Home",
+                selected = currentRoute == NavigationRoutes.HOME,
+                onClick = {
+                    if (currentRoute != NavigationRoutes.HOME) {
+                        navController.navigate(NavigationRoutes.HOME) {
+                            popUpTo(NavigationRoutes.HOME) { inclusive = true }
+                        }
+                    }
+                }
+            )
+
+            BottomNavItem(
+                icon = Icons.Default.Star,
+                label = "Categories",
+                selected = currentRoute == NavigationRoutes.CATEGORIES,
+                onClick = {
+                    if (currentRoute != NavigationRoutes.CATEGORIES) {
+                        navController.navigate(NavigationRoutes.CATEGORIES) {
+                            popUpTo(NavigationRoutes.HOME)
+                        }
+                    }
+                }
+            )
+
+            BottomNavItem(
+                icon = Icons.Outlined.ShoppingCart,
+                label = "My Bookings",
+                selected = currentRoute == NavigationRoutes.MY_BOOKINGS,
+                onClick = {
+                    if (currentRoute != NavigationRoutes.MY_BOOKINGS) {
+                        navController.navigate(NavigationRoutes.MY_BOOKINGS) {
+                            popUpTo(NavigationRoutes.HOME)
+                        }
+                    }
+                }
+            )
+
+            BottomNavItem(
+                icon = Icons.Outlined.AccountCircle,
+                label = "My Account",
+                selected = currentRoute == "account",
+                onClick = { /* Navigate to account when implemented */ }
+            )
+        }
+    }
+}
+
+// Update BottomNavItem to include onClick
+@Composable
+private fun FarmTechHomeScreen.BottomNavItem(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    label: String,
+    selected: Boolean = false,
+    onClick: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .clickable(onClick = onClick)
+            .padding(8.dp)
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = label,
+            tint = if (selected) Color(0xFF4CAF50) else Color.Gray,
+            modifier = Modifier.size(24.dp)
+        )
+
+        Text(
+            text = label,
+            fontSize = 12.sp,
+            color = if (selected) Color(0xFF4CAF50) else Color.Gray
+        )
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun PreviewFarmTechApp() {

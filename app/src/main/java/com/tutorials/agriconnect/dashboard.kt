@@ -43,6 +43,7 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.navigation.NavHostController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 
@@ -879,4 +880,240 @@ private data class Commodity(
 @Composable
 fun Preview() {
     FarmersAppScreen()
+}
+
+// Update the FarmersAppScreen function signature to accept navController
+@Composable
+fun FarmersAppScreen(navController: NavHostController, currentRoute: String) {
+    val scrollState = rememberScrollState()
+    var isSidebarVisible by remember { mutableStateOf(false) }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Main content with scroll
+        Box(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color(0xFF6B8E23)) // Olive green background
+                    .verticalScroll(scrollState)
+                    .padding(bottom = 72.dp) // Add padding for task bar at bottom
+            ) {
+                // Header
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    // Menu button for sidebar
+                    IconButton(
+                        onClick = { isSidebarVisible = true },
+                        modifier = Modifier
+                            .size(40.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color(0x33FFFFFF))
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = "Open Menu",
+                            tint = Color.White
+                        )
+                    }
+
+                    Text(
+                        text = "Hello, Farmers",
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(150.dp, 24.dp)
+                                .background(Color(0xFF6B8E23), shape = RoundedCornerShape(4.dp)),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Row {
+                                Text(
+                                    "Location",
+                                    fontSize = 18.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color.White
+                                )
+                                IconButton(onClick = { /*TODO*/ }) {
+                                    Icon(imageVector = Icons.Default.LocationOn, contentDescription = null, tint = Color.White)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Existing content remains unchanged
+                // Search Bar
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color(0x99FFFFFF))
+                        .padding(8.dp)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        // Replace icon with a box
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .background(
+                                    Color.Gray.copy(alpha = 0.3f),
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Search here...",
+                            color = Color.Gray,
+                            fontSize = 14.sp
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+                        // Replace icon with a box
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .background(
+                                    Color.Gray.copy(alpha = 0.3f),
+                                    shape = RoundedCornerShape(12.dp)
+                                )
+                        )
+                    }
+                }
+
+                NewScrollableSection()
+                CommoditiesSection()
+                MyFieldsSection()
+                Spacer(modifier = Modifier.weight(1f))
+            }
+
+            // Task Bar (always visible) - Updated to use NavController
+            TaskBar(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .zIndex(10f),
+                navController = navController,
+                currentRoute = currentRoute
+            )
+        }
+
+        // Sidebar overlay (animated)
+        SidebarOverlay(
+            isVisible = isSidebarVisible,
+            onDismiss = { isSidebarVisible = false }
+        )
+    }
+}
+
+// Updated TaskBar to handle navigation
+@Composable
+fun TaskBar(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    currentRoute: String
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(72.dp)
+            .shadow(8.dp)
+            .background(Color.White)
+            .padding(horizontal = 8.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        // Home
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = "Home",
+                    modifier = Modifier.size(28.dp),
+                    tint = if (currentRoute == NavigationRoutes.HOME) Color(0xFF4CAF50) else Color.Gray
+                )
+            },
+            text = "Home",
+            isSelected = currentRoute == NavigationRoutes.HOME,
+            onClick = {
+                if (currentRoute != NavigationRoutes.HOME) {
+                    navController.navigate(NavigationRoutes.HOME) {
+                        // Pop up to the start destination and avoid building up a large stack
+                        popUpTo(NavigationRoutes.HOME) { inclusive = true }
+                    }
+                }
+            }
+        )
+
+        // Categories
+        TaskBarItem(
+            icon = {
+                // Custom icon from the provided PNG resource
+                Image(
+                    painter = painterResource(id = R.drawable.categories_icon),
+                    contentDescription = "Categories",
+                    modifier = Modifier.size(28.dp),
+                    colorFilter = ColorFilter.tint(if (currentRoute == NavigationRoutes.CATEGORIES) Color(0xFF4CAF50) else Color.Gray)
+                )
+            },
+            text = "Categories",
+            isSelected = currentRoute == NavigationRoutes.CATEGORIES,
+            onClick = {
+                if (currentRoute != NavigationRoutes.CATEGORIES) {
+                    navController.navigate(NavigationRoutes.CATEGORIES) {
+                        popUpTo(NavigationRoutes.HOME)
+                    }
+                }
+            }
+        )
+
+        // My Bookings
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.ShoppingCart,
+                    contentDescription = "My Bookings",
+                    modifier = Modifier.size(28.dp),
+                    tint = if (currentRoute == NavigationRoutes.MY_BOOKINGS) Color(0xFF4CAF50) else Color.Gray
+                )
+            },
+            text = "My Bookings",
+            isSelected = currentRoute == NavigationRoutes.MY_BOOKINGS,
+            onClick = {
+                if (currentRoute != NavigationRoutes.MY_BOOKINGS) {
+                    navController.navigate(NavigationRoutes.MY_BOOKINGS) {
+                        popUpTo(NavigationRoutes.HOME)
+                    }
+                }
+            }
+        )
+
+        // My Account
+        TaskBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "My Account",
+                    modifier = Modifier.size(28.dp),
+                    tint = if (currentRoute == "account") Color(0xFF4CAF50) else Color.Gray
+                )
+            },
+            text = "My Account",
+            isSelected = currentRoute == "account",
+            onClick = { /* Navigate to account when implemented */ }
+        )
+    }
 }
