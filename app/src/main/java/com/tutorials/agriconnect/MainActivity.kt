@@ -1,9 +1,5 @@
 package com.tutorials.agriconnect
 
-
-
-import LoginScreen
-import SignupScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,47 +12,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.tutorials.agriconnect.ui.theme.AgriconnectTheme
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
         setContent {
-
             AgriconnectTheme {
-
-                // A surface container using the 'background' color from the theme
-
                 Surface(
-
                     modifier = Modifier.fillMaxSize(),
-
                     color = MaterialTheme.colorScheme.background
-
                 ) {
-
-                    FarmTechHomeScreen().FarmTechApp()
+                    MainContent()
                 }
-
             }
-
         }
-
     }
-
 }
 
-
-
-
-
-
-
-@Preview(showBackground=true)
-
 @Composable
+fun MainContent() {
+    // Test with either "Sowing & Planting Equipment" or "Land Preparation Equipment"
+    SpecificCategoryScreen(
+        category = "Land Preparation Equipment",
+        onBackClick = {
+            // Do nothing or implement a simple back action
+        }
+    )
+}
 
-fun APreview(){
-
-    CropPage()
+@Preview(showBackground = true)
+@Composable
+fun APreview() {
+    AgriconnectTheme {
+        MainContent()
+    }
 }
