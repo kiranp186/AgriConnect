@@ -1,7 +1,7 @@
 [
   {
     "equipment_name": "Plow",
-    "crop": ["Rice", "Corn", "Wheat", "Ragi", "Chickpea", "Soybean", "Groundnut", "Potato", "Cotton", "Sugarcane", "Vegetable", "Ginger", "Areca nut", "Coconut", "Fruits"],
+    "crop": ["Rice", "Corn", "Wheat", "Ragi", "Chickpea", "Soybean", "Groundnut","Sugarcane", "Potato", "Cotton", "Sugarcane", "Vegetable", "Ginger", "Areca nut", "Coconut", "Fruits"],
     "category": "Land Preparation Equipment",
     "image": "plow",
     "details": "Used for primary tillage to turn over and break up soil, bury crop residues, and prepare the land for sowing."
@@ -127,7 +127,7 @@
   },
   {
     "equipment_name": "Cotton Picker",
-    "crop": ["Potato"],
+    "crop": ["Cotton"],
     "category": "Harvesting Equipment",
     "image": "cottonpicker",
     "details": "A mechanized harvester designed to pick cotton from the plants without damaging the fibers."
@@ -187,13 +187,6 @@
     "category": "Transport & Handling Equipment",
     "image": "trailers",
     "details": "Used for transporting crops, equipment, and other agricultural materials."
-  },
-  {
-    "equipment_name": "Conveyor Belts",
-    "crop": ["Rice", "Corn", "Wheat", "Ragi", "Chickpea", "Soybean", "Groundnut", "Potato", "Cotton", "Sugarcane", "Vegetable", "Ginger", "Areca nut", "Coconut", "Fruits","Areca nut", "Coconut"],
-    "category": "Transport & Handling Equipment",
-    "image": "conveyorbelts",
-    "details": "Facilitates the movement of harvested crops and processed goods."
   },
   {
     "equipment_name": "Manual Coconut & Areca Nut Climber",

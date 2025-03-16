@@ -30,8 +30,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainContent() {
     // Test with either "Sowing & Planting Equipment" or "Land Preparation Equipment"
-    SpecificCategoryScreen(
-        category = "Land Preparation Equipment",
+    CropSpecificScreen(
+        cropName = "Coconut",
         onBackClick = {
             // Do nothing or implement a simple back action
         }
