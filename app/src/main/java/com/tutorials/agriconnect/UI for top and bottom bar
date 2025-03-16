@@ -85,3 +85,19 @@ fun MyBookings() {
         }
     }
 }
+
+
+
+
+
+// Example navigation to specific category
+navController.navigate("specificEquipment/$selectedCategory")
+
+// In your NavHost
+composable(
+    route = "specificEquipment/{category}",
+    arguments = listOf(navArgument("category") { type = NavType.StringType })
+) { backStackEntry ->
+    val category = backStackEntry.arguments?.getString("category") ?: "Land Preparation Equipment"
+    specificEquipment(category)
+}
