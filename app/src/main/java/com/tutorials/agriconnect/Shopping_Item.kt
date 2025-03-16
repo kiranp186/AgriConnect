@@ -520,7 +520,7 @@ fun FarmTechHomeScreen.FarmTechApp(navController: NavHostController, currentRout
                 .fillMaxSize()
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 14.dp)
         ) {
             SearchBar()
             Spacer(modifier = Modifier.height(16.dp))
