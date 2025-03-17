@@ -48,6 +48,9 @@ android {
 }
 
 dependencies {
+    //navigation
+
+    implementation("androidx.navigation:navigation-compose:2.7.4")
     // Kotlin Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
