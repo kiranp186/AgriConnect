@@ -1,0 +1,298 @@
+Index: app/src/main/java/com/tutorials/agriconnect/LoginPage.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutorials.agriconnect\r\n\r\nimport androidx.compose.foundation.layout.Arrangement\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.Spacer\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.foundation.layout.fillMaxWidth\r\nimport androidx.compose.foundation.layout.height\r\nimport androidx.compose.foundation.layout.padding\r\nimport androidx.compose.foundation.text.KeyboardOptions\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.filled.Phone\r\nimport androidx.compose.material3.Button\r\nimport androidx.compose.material3.Icon\r\nimport androidx.compose.material3.IconButton\r\nimport androidx.compose.material3.OutlinedTextField\r\nimport androidx.compose.material3.Text\r\nimport androidx.compose.material3.TextButton\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.runtime.getValue\r\nimport androidx.compose.runtime.mutableStateOf\r\nimport androidx.compose.runtime.remember\r\nimport androidx.compose.runtime.setValue\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.text.input.KeyboardType\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.compose.ui.unit.sp\r\n\r\n\r\n@Composable\r\nfun LoginScreen(\r\n    onLoginClick: () -> Unit,\r\n    onSignUpClick: () -> Unit,\r\n    onForgotClick: () -> Unit\r\n) {\r\n    var username by remember { mutableStateOf(\"\") }\r\n    var phoneNumber by remember { mutableStateOf(\"\") }\r\n    var password by remember { mutableStateOf(\"\") }\r\n    var passwordVisible by remember { mutableStateOf(false) }\r\n\r\n    Column(\r\n        modifier = Modifier\r\n            .fillMaxSize()\r\n            .padding(16.dp),\r\n        horizontalAlignment = Alignment.CenterHorizontally,\r\n        verticalArrangement = Arrangement.Center\r\n    ) {\r\n        Text(\r\n            text = \"Login\",\r\n            fontSize = 24.sp,\r\n            modifier = Modifier.padding(bottom = 32.dp)\r\n        )\r\n\r\n        // Phone number field\r\n        OutlinedTextField(\r\n            value = phoneNumber,\r\n            onValueChange = { phoneNumber = it },\r\n            label = { Text(\"Phone Number\") },\r\n            leadingIcon = { Icon(Icons.Default.Phone, contentDescription = \"Phone\") },\r\n            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            singleLine = true\r\n        )\r\n\r\n        // Password field\r\n        OutlinedTextField(\r\n            value = password,\r\n            onValueChange = { password = it },\r\n            label = { Text(\"Password\") },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            singleLine = true,\r\n            trailingIcon = {\r\n                IconButton(onClick = { passwordVisible = !passwordVisible }) {\r\n                    Text(\r\n                        text = if (passwordVisible)\"\uD83D\uDC41\" else \"\uD83D\uDC41\u200D\uD83D\uDDE8\",\r\n                        fontSize = 18.sp\r\n                    )\r\n                }\r\n            }\r\n        )\r\n\r\n        Button(\r\n            onClick = { onLoginClick() },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .height(50.dp).padding(4.dp)\r\n        ) {\r\n            Text(\"Login\")\r\n        }\r\n\r\n        Spacer(modifier = Modifier.height(16.dp))\r\n\r\n        TextButton(onClick = { onForgotClick() }) {\r\n            Text(\"Forgot Password?\")\r\n        }\r\n\r\n        TextButton(onClick = { onSignUpClick() }) {\r\n            Text(\"Don't have an account? Sign Up\")\r\n        }\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutorials/agriconnect/LoginPage.kt b/app/src/main/java/com/tutorials/agriconnect/LoginPage.kt
+--- a/app/src/main/java/com/tutorials/agriconnect/LoginPage.kt	
++++ b/app/src/main/java/com/tutorials/agriconnect/LoginPage.kt	
+@@ -1,7 +1,9 @@
+ package com.tutorials.agriconnect
+ 
++import android.widget.Toast
+ import androidx.compose.foundation.layout.Arrangement
+ import androidx.compose.foundation.layout.Column
++import androidx.compose.foundation.layout.Row
+ import androidx.compose.foundation.layout.Spacer
+ import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.foundation.layout.fillMaxWidth
+@@ -9,11 +11,14 @@
+ import androidx.compose.foundation.layout.padding
+ import androidx.compose.foundation.text.KeyboardOptions
+ import androidx.compose.material.icons.Icons
++import androidx.compose.material.icons.filled.Email
+ import androidx.compose.material.icons.filled.Phone
+ import androidx.compose.material3.Button
++import androidx.compose.material3.CircularProgressIndicator
+ import androidx.compose.material3.Icon
+ import androidx.compose.material3.IconButton
+ import androidx.compose.material3.OutlinedTextField
++import androidx.compose.material3.RadioButton
+ import androidx.compose.material3.Text
+ import androidx.compose.material3.TextButton
+ import androidx.compose.runtime.Composable
+@@ -23,10 +28,13 @@
+ import androidx.compose.runtime.setValue
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
++import androidx.compose.ui.platform.LocalContext
+ import androidx.compose.ui.text.input.KeyboardType
++import androidx.compose.ui.text.input.PasswordVisualTransformation
++import androidx.compose.ui.text.input.VisualTransformation
+ import androidx.compose.ui.unit.dp
+ import androidx.compose.ui.unit.sp
+-
++import com.google.firebase.auth.FirebaseAuth
+ 
+ @Composable
+ fun LoginScreen(
+@@ -34,10 +42,16 @@
+     onSignUpClick: () -> Unit,
+     onForgotClick: () -> Unit
+ ) {
+-    var username by remember { mutableStateOf("") }
++    var loginMethod by remember { mutableStateOf("phone") } // "phone" or "email"
+     var phoneNumber by remember { mutableStateOf("") }
++    var email by remember { mutableStateOf("") }
+     var password by remember { mutableStateOf("") }
+     var passwordVisible by remember { mutableStateOf(false) }
++    var isLoading by remember { mutableStateOf(false) }
++    var errorMessage by remember { mutableStateOf("") }
++
++    val context = LocalContext.current
++    val auth = remember { FirebaseAuth.getInstance() }
+ 
+     Column(
+         modifier = Modifier
+@@ -52,28 +66,96 @@
+             modifier = Modifier.padding(bottom = 32.dp)
+         )
+ 
+-        // Phone number field
+-        OutlinedTextField(
+-            value = phoneNumber,
+-            onValueChange = { phoneNumber = it },
+-            label = { Text("Phone Number") },
+-            leadingIcon = { Icon(Icons.Default.Phone, contentDescription = "Phone") },
+-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp),
+-            singleLine = true
+-        )
++        // Show error message if any
++        if (errorMessage.isNotEmpty()) {
++            Text(
++                text = errorMessage,
++                color = androidx.compose.ui.graphics.Color.Red,
++                modifier = Modifier.padding(bottom = 16.dp)
++            )
++        }
++
++        // Login method selection
++        Row(
++            modifier = Modifier
++                .fillMaxWidth()
++                .padding(bottom = 16.dp),
++            verticalAlignment = Alignment.CenterVertically
++        ) {
++            Row(
++                verticalAlignment = Alignment.CenterVertically,
++                modifier = Modifier.weight(1f)
++            ) {
++                RadioButton(
++                    selected = loginMethod == "phone",
++                    onClick = { loginMethod = "phone" }
++                )
++                Text("Phone")
++            }
++
++            Row(
++                verticalAlignment = Alignment.CenterVertically,
++                modifier = Modifier.weight(1f)
++            ) {
++                RadioButton(
++                    selected = loginMethod == "email",
++                    onClick = { loginMethod = "email" }
++                )
++                Text("Email")
++            }
++        }
++
++        // Phone number field (shown when phone login method is selected)
++        if (loginMethod == "phone") {
++            OutlinedTextField(
++                value = phoneNumber,
++                onValueChange = {
++                    if (it.length <= 10 && it.all { char -> char.isDigit() }) {
++                        phoneNumber = it
++                        errorMessage = ""
++                    }
++                },
++                label = { Text("Phone Number") },
++                leadingIcon = { Icon(Icons.Default.Phone, contentDescription = "Phone") },
++                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true,
++                prefix = { Text("+91 ") }  // Assuming India country code
++            )
++        } else {
++            // Email field (shown when email login method is selected)
++            OutlinedTextField(
++                value = email,
++                onValueChange = {
++                    email = it
++                    errorMessage = ""
++                },
++                label = { Text("Email Address") },
++                leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email") },
++                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true
++            )
++        }
+ 
+         // Password field
+         OutlinedTextField(
+             value = password,
+-            onValueChange = { password = it },
++            onValueChange = {
++                password = it
++                errorMessage = ""
++            },
+             label = { Text("Password") },
+             modifier = Modifier
+                 .fillMaxWidth()
+                 .padding(bottom = 16.dp),
+             singleLine = true,
++            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
++            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+             trailingIcon = {
+                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                     Text(
+@@ -85,12 +167,64 @@
+         )
+ 
+         Button(
+-            onClick = { onLoginClick() },
++            onClick = {
++                when (loginMethod) {
++                    "phone" -> {
++                        if (phoneNumber.length != 10) {
++                            errorMessage = "Please enter a valid 10-digit phone number"
++                            return@Button
++                        }
++                    }
++                    "email" -> {
++                        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
++                            errorMessage = "Please enter a valid email address"
++                            return@Button
++                        }
++                    }
++                }
++
++                if (password.length < 6) {
++                    errorMessage = "Password must be at least 6 characters"
++                    return@Button
++                }
++
++                isLoading = true
++                errorMessage = ""
++
++                // Firebase login with email or phone (using phone as email if phone method)
++                val loginEmail = if (loginMethod == "phone") {
++                    "$phoneNumber@agriconnect.com"
++                } else {
++                    email
++                }
++
++                auth.signInWithEmailAndPassword(loginEmail, password)
++                    .addOnCompleteListener { task ->
++                        isLoading = false
++                        if (task.isSuccessful) {
++                            // Login successful
++                            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
++                            onLoginClick()
++                        } else {
++                            // Login failed
++                            errorMessage = task.exception?.message ?: "Login failed"
++                        }
++                    }
++            },
+             modifier = Modifier
+                 .fillMaxWidth()
+-                .height(50.dp).padding(4.dp)
++                .height(50.dp)
++                .padding(4.dp),
++            enabled = !isLoading
+         ) {
+-            Text("Login")
++            if (isLoading) {
++                CircularProgressIndicator(
++                    modifier = Modifier.height(24.dp),
++                    strokeWidth = 2.dp
++                )
++            } else {
++                Text("Login")
++            }
+         }
+ 
+         Spacer(modifier = Modifier.height(16.dp))
+@@ -103,5 +237,4 @@
+             Text("Don't have an account? Sign Up")
+         }
+     }
+-}
+-
++}
+\ No newline at end of file
+Index: app/google-services.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"project_info\": {\r\n    \"project_number\": \"888046068253\",\r\n    \"project_id\": \"agriconnect-3d792\",\r\n    \"storage_bucket\": \"agriconnect-3d792.firebasestorage.app\"\r\n  },\r\n  \"client\": [\r\n    {\r\n      \"client_info\": {\r\n        \"mobilesdk_app_id\": \"1:888046068253:android:6c8af28e9e4cfab56a5cf4\",\r\n        \"android_client_info\": {\r\n          \"package_name\": \"com.tutorials.agriconnect\"\r\n        }\r\n      },\r\n      \"oauth_client\": [],\r\n      \"api_key\": [\r\n        {\r\n          \"current_key\": \"AIzaSyDDJzG-k3Z1n7NnEcEoS5VTdsWdkviYE9c\"\r\n        }\r\n      ],\r\n      \"services\": {\r\n        \"appinvite_service\": {\r\n          \"other_platform_oauth_client\": []\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  \"configuration_version\": \"1\"\r\n}
+===================================================================
+diff --git a/app/google-services.json b/app/google-services.json
+--- a/app/google-services.json	
++++ b/app/google-services.json	
+@@ -12,7 +12,20 @@
+           "package_name": "com.tutorials.agriconnect"
+         }
+       },
+-      "oauth_client": [],
++      "oauth_client": [
++        {
++          "client_id": "888046068253-9vlt5oqtv8336t0m27u1jpil1lm4lnoa.apps.googleusercontent.com",
++          "client_type": 1,
++          "android_info": {
++            "package_name": "com.tutorials.agriconnect",
++            "certificate_hash": "4c3c77b1ed772ae60819cfbef238ceb573b85eaf"
++          }
++        },
++        {
++          "client_id": "888046068253-tlmuaaddeat9tl5dnia21c48tofh8iko.apps.googleusercontent.com",
++          "client_type": 3
++        }
++      ],
+       "api_key": [
+         {
+           "current_key": "AIzaSyDDJzG-k3Z1n7NnEcEoS5VTdsWdkviYE9c"
+@@ -20,7 +33,12 @@
+       ],
+       "services": {
+         "appinvite_service": {
+-          "other_platform_oauth_client": []
++          "other_platform_oauth_client": [
++            {
++              "client_id": "888046068253-tlmuaaddeat9tl5dnia21c48tofh8iko.apps.googleusercontent.com",
++              "client_type": 3
++            }
++          ]
+         }
+       }
+     }

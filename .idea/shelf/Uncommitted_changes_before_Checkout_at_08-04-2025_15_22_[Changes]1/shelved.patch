@@ -1,0 +1,1015 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.Agriconnect\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\"\r\n            android:label=\"@string/app_name\"\r\n            android:theme=\"@style/Theme.Agriconnect\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -2,6 +2,11 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+ 
++    <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
++    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
++
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id(\"com.android.application\")\r\n    id(\"org.jetbrains.kotlin.android\")\r\n    id(\"org.jetbrains.kotlin.plugin.serialization\")\r\n    id(\"com.google.gms.google-services\") // Add this line\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.tutorials.agriconnect\"\r\n    compileSdk = 35\r\n    defaultConfig {\r\n        applicationId = \"com.tutorials.agriconnect\"\r\n        minSdk = 26\r\n        targetSdk = 34\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n        vectorDrawables {\r\n            useSupportLibrary = true\r\n        }\r\n    }\r\n    buildTypes {\r\n        release {\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_1_8\r\n        targetCompatibility = JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = \"1.8\"\r\n    }\r\n    buildFeatures {\r\n        compose = true\r\n    }\r\n    composeOptions {\r\n        kotlinCompilerExtensionVersion = \"1.5.1\"\r\n    }\r\n    packaging {\r\n        resources {\r\n            excludes += \"/META-INF/{AL2.0,LGPL2.1}\"\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    //navigation\r\n\r\n    implementation(\"androidx.navigation:navigation-compose:2.7.4\")\r\n    // Kotlin Serialization\r\n    implementation(\"org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1\")\r\n\r\n    // Existing dependencies\r\n    implementation(\"androidx.core:core-ktx:1.15.0\")\r\n    implementation(\"androidx.lifecycle:lifecycle-runtime-ktx:2.8.7\")\r\n    implementation(\"androidx.activity:activity-compose:1.10.0\")\r\n    implementation(platform(\"androidx.compose:compose-bom:2023.08.00\"))\r\n    implementation(\"androidx.compose.ui:ui\")\r\n    implementation(\"androidx.compose.ui:ui-graphics\")\r\n    implementation(\"androidx.compose.ui:ui-tooling-preview\")\r\n    implementation(\"androidx.compose.material3:material3\")\r\n    implementation(\"androidx.appcompat:appcompat:1.7.0\")\r\n    implementation(\"androidx.recyclerview:recyclerview:1.4.0\")\r\n    implementation(\"com.google.android.material:material:1.12.0\")\r\n    implementation(\"com.google.firebase:firebase-auth:22.3.1\")\r\n    implementation(\"androidx.credentials:credentials:1.5.0\")\r\n    implementation(\"androidx.credentials:credentials-play-services-auth:1.5.0\")\r\n    implementation(\"com.google.android.libraries.identity.googleid:googleid:1.1.1\")\r\n\r\n    implementation(platform(\"com.google.firebase:firebase-bom:32.7.3\"))\r\n    testImplementation(\"junit:junit:4.13.2\")\r\n    androidTestImplementation(\"androidx.test.ext:junit:1.2.1\")\r\n    androidTestImplementation(\"androidx.test.espresso:espresso-core:3.6.1\")\r\n    androidTestImplementation(platform(\"androidx.compose:compose-bom:2023.08.00\"))\r\n    androidTestImplementation(\"androidx.compose.ui:ui-test-junit4\")\r\n    debugImplementation(\"androidx.compose.ui:ui-tooling\")\r\n    debugImplementation(\"androidx.compose.ui:ui-test-manifest\")\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	
++++ b/app/build.gradle.kts	
+@@ -73,6 +73,7 @@
+     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+ 
+     implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
++    implementation("com.google.firebase:firebase-firestore-ktx:25.1.3")
+     testImplementation("junit:junit:4.13.2")
+     androidTestImplementation("androidx.test.ext:junit:1.2.1")
+     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+Index: app/src/main/java/com/tutorials/agriconnect/SignUpPage.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutorials.agriconnect\r\n\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.Row\r\nimport androidx.compose.foundation.layout.Spacer\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.foundation.layout.fillMaxWidth\r\nimport androidx.compose.foundation.layout.height\r\nimport androidx.compose.foundation.layout.padding\r\nimport androidx.compose.foundation.rememberScrollState\r\nimport androidx.compose.foundation.text.KeyboardOptions\r\nimport androidx.compose.foundation.verticalScroll\r\nimport androidx.compose.material3.Button\r\nimport androidx.compose.material3.DropdownMenuItem\r\nimport androidx.compose.material3.ExperimentalMaterial3Api\r\nimport androidx.compose.material3.ExposedDropdownMenuBox\r\nimport androidx.compose.material3.ExposedDropdownMenuDefaults\r\nimport androidx.compose.material3.LocalTextStyle\r\nimport androidx.compose.material3.MaterialTheme\r\nimport androidx.compose.material3.OutlinedTextField\r\nimport androidx.compose.material3.Text\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.runtime.getValue\r\nimport androidx.compose.runtime.mutableStateOf\r\nimport androidx.compose.runtime.remember\r\nimport androidx.compose.runtime.setValue\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.text.input.KeyboardType\r\nimport androidx.compose.ui.text.input.PasswordVisualTransformation\r\nimport androidx.compose.ui.text.style.TextAlign\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.compose.ui.unit.sp\r\n\r\n@OptIn(ExperimentalMaterial3Api::class)\r\n@Composable\r\nfun SignupScreen(onSignUpClick:()->Unit) {\r\n    // State variables for form fields\r\n    var username by remember { mutableStateOf(\"\") }\r\n    var phoneNumber by remember { mutableStateOf(\"\") }\r\n    var otpSent by remember { mutableStateOf(false) }\r\n    var otp by remember { mutableStateOf(\"\") }\r\n    var password by remember { mutableStateOf(\"\") }\r\n    var confirmPassword by remember { mutableStateOf(\"\") }\r\n\r\n    // User type selection\r\n    var expanded by remember { mutableStateOf(false) }\r\n    var selectedUserType by remember { mutableStateOf(\"Select User Type\") }\r\n    val userTypes = listOf(\"Farmer\", \"Equipment Provider\")\r\n\r\n    // Location details\r\n    var state by remember { mutableStateOf(\"\") }\r\n    var district by remember { mutableStateOf(\"\") }\r\n    var taluk by remember { mutableStateOf(\"\") }\r\n    var address by remember { mutableStateOf(\"\") }\r\n\r\n    Column(\r\n        modifier = Modifier\r\n            .fillMaxSize()\r\n            .padding(16.dp)\r\n            .verticalScroll(rememberScrollState()),\r\n        horizontalAlignment = Alignment.CenterHorizontally\r\n    ) {\r\n        Text(\r\n            text = \"Create Account\",\r\n            fontSize = 24.sp,\r\n            modifier = Modifier.padding(vertical = 24.dp)\r\n        )\r\n\r\n        // Username field\r\n        OutlinedTextField(\r\n            value = username,\r\n            onValueChange = { username = it },\r\n            label = { Text(\"Username\") },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            singleLine = true\r\n        )\r\n\r\n        // Phone number field with OTP button\r\n        Row(\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            verticalAlignment = Alignment.CenterVertically\r\n        ) {\r\n            OutlinedTextField(\r\n                value = phoneNumber,\r\n                onValueChange = {\r\n                    if (it.length <= 10 && it.all { char -> char.isDigit() }) phoneNumber = it\r\n                },\r\n                label = { Text(\"Phone Number\") },\r\n                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),\r\n                modifier = Modifier\r\n                    .weight(1f)\r\n                    .padding(end = 8.dp),\r\n                singleLine = true\r\n            )\r\n\r\n            Button(\r\n                onClick = { otpSent = true },\r\n                enabled = phoneNumber.length == 10,\r\n                modifier = Modifier.padding(start = 8.dp)\r\n            ) {\r\n                Text(\"Get OTP\")\r\n            }\r\n        }\r\n\r\n        // OTP Field (visible only after \"Get OTP\" is clicked)\r\n        if (otpSent) {\r\n            Text(\r\n                text = \"Enter OTP sent to your phone\",\r\n                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)\r\n            )\r\n\r\n            OutlinedTextField(\r\n                value = otp,\r\n                onValueChange = {\r\n                    if (it.length <= 6 && it.all { char -> char.isDigit() }) {\r\n                        otp = it\r\n                    }\r\n                },\r\n                label = { Text(\"Enter 6-digit OTP\") },\r\n                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),\r\n                modifier = Modifier\r\n                    .fillMaxWidth()\r\n                    .padding(bottom = 16.dp),\r\n                singleLine = true,\r\n                textStyle = LocalTextStyle.current.copy(\r\n                    textAlign = TextAlign.Center,\r\n                    fontSize = 18.sp\r\n                )\r\n            )\r\n        }\r\n\r\n        // Password field\r\n        OutlinedTextField(\r\n            value = password,\r\n            onValueChange = { password = it },\r\n            label = { Text(\"Password\") },\r\n            visualTransformation = PasswordVisualTransformation(),\r\n            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            singleLine = true\r\n        )\r\n\r\n        // Confirm Password field\r\n        OutlinedTextField(\r\n            value = confirmPassword,\r\n            onValueChange = { confirmPassword = it },\r\n            label = { Text(\"Confirm Password\") },\r\n            visualTransformation = PasswordVisualTransformation(),\r\n            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            singleLine = true,\r\n            isError = password != confirmPassword && confirmPassword.isNotEmpty()\r\n        )\r\n\r\n        if (password != confirmPassword && confirmPassword.isNotEmpty()) {\r\n            Text(\r\n                text = \"Passwords do not match\",\r\n                color = MaterialTheme.colorScheme.error,\r\n                modifier = Modifier\r\n                    .align(Alignment.Start)\r\n                    .padding(bottom = 16.dp)\r\n            )\r\n        }\r\n\r\n        // User Type Dropdown\r\n        ExposedDropdownMenuBox(\r\n            expanded = expanded,\r\n            onExpandedChange = { expanded = it },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp)\r\n        ) {\r\n            OutlinedTextField(\r\n                value = selectedUserType,\r\n                onValueChange = {},\r\n                readOnly = true,\r\n                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },\r\n                label = { Text(\"User Type\") },\r\n                modifier = Modifier\r\n                    .fillMaxWidth()\r\n                    .menuAnchor()\r\n            )\r\n\r\n            ExposedDropdownMenu(\r\n                expanded = expanded,\r\n                onDismissRequest = { expanded = false }\r\n            ) {\r\n                userTypes.forEach { option ->\r\n                    DropdownMenuItem(\r\n                        text = { Text(option) },\r\n                        onClick = {\r\n                            selectedUserType = option\r\n                            expanded = false\r\n                        }\r\n                    )\r\n                }\r\n            }\r\n        }\r\n\r\n        // State field\r\n        OutlinedTextField(\r\n            value = state,\r\n            onValueChange = { state = it },\r\n            label = { Text(\"State\") },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp),\r\n            singleLine = true\r\n        )\r\n\r\n        // District and Taluk side by side\r\n        Row(\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 16.dp)\r\n        ) {\r\n            OutlinedTextField(\r\n                value = district,\r\n                onValueChange = { district = it },\r\n                label = { Text(\"District\") },\r\n                modifier = Modifier\r\n                    .weight(1f)\r\n                    .padding(end = 8.dp),\r\n                singleLine = true\r\n            )\r\n\r\n            OutlinedTextField(\r\n                value = taluk,\r\n                onValueChange = { taluk = it },\r\n                label = { Text(\"Taluk\") },\r\n                modifier = Modifier\r\n                    .weight(1f)\r\n                    .padding(start = 8.dp),\r\n                singleLine = true\r\n            )\r\n        }\r\n\r\n        // Address field\r\n        OutlinedTextField(\r\n            value = address,\r\n            onValueChange = { address = it },\r\n            label = { Text(\"Address\") },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .height(120.dp)\r\n                .padding(bottom = 24.dp),\r\n            maxLines = 4\r\n        )\r\n\r\n        // Signup button\r\n        Button(\r\n            onClick = { onSignUpClick() },\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .height(50.dp)\r\n                .padding(bottom = 16.dp)\r\n        ) {\r\n            Text(\"Sign Up\")\r\n        }\r\n\r\n        Spacer(modifier = Modifier.height(16.dp))\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutorials/agriconnect/SignUpPage.kt b/app/src/main/java/com/tutorials/agriconnect/SignUpPage.kt
+--- a/app/src/main/java/com/tutorials/agriconnect/SignUpPage.kt	
++++ b/app/src/main/java/com/tutorials/agriconnect/SignUpPage.kt	
+@@ -1,5 +1,6 @@
+ package com.tutorials.agriconnect
+ 
++import android.widget.Toast
+ import androidx.compose.foundation.layout.Column
+ import androidx.compose.foundation.layout.Row
+ import androidx.compose.foundation.layout.Spacer
+@@ -11,11 +12,11 @@
+ import androidx.compose.foundation.text.KeyboardOptions
+ import androidx.compose.foundation.verticalScroll
+ import androidx.compose.material3.Button
++import androidx.compose.material3.CircularProgressIndicator
+ import androidx.compose.material3.DropdownMenuItem
+ import androidx.compose.material3.ExperimentalMaterial3Api
+ import androidx.compose.material3.ExposedDropdownMenuBox
+ import androidx.compose.material3.ExposedDropdownMenuDefaults
+-import androidx.compose.material3.LocalTextStyle
+ import androidx.compose.material3.MaterialTheme
+ import androidx.compose.material3.OutlinedTextField
+ import androidx.compose.material3.Text
+@@ -26,22 +27,35 @@
+ import androidx.compose.runtime.setValue
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
++import androidx.compose.ui.platform.LocalContext
+ import androidx.compose.ui.text.input.KeyboardType
+ import androidx.compose.ui.text.input.PasswordVisualTransformation
+-import androidx.compose.ui.text.style.TextAlign
+ import androidx.compose.ui.unit.dp
+ import androidx.compose.ui.unit.sp
++import com.google.firebase.FirebaseException
++import com.google.firebase.auth.FirebaseAuth
++import com.google.firebase.auth.PhoneAuthCredential
++import com.google.firebase.auth.PhoneAuthOptions
++import com.google.firebase.auth.PhoneAuthProvider
++import com.google.firebase.firestore.FirebaseFirestore
++import java.util.concurrent.TimeUnit
+ 
+ @OptIn(ExperimentalMaterial3Api::class)
+ @Composable
+-fun SignupScreen(onSignUpClick:()->Unit) {
++fun SignupScreen(onSignUpClick: () -> Unit) {
+     // State variables for form fields
+     var username by remember { mutableStateOf("") }
+     var phoneNumber by remember { mutableStateOf("") }
+-    var otpSent by remember { mutableStateOf(false) }
+-    var otp by remember { mutableStateOf("") }
+     var password by remember { mutableStateOf("") }
+     var confirmPassword by remember { mutableStateOf("") }
++    var isLoading by remember { mutableStateOf(false) }
++    var errorMessage by remember { mutableStateOf("") }
++    var successMessage by remember { mutableStateOf("") }
++
++    // OTP verification states
++    var isVerificationSent by remember { mutableStateOf(false) }
++    var verificationId by remember { mutableStateOf("") }
++    var verificationCode by remember { mutableStateOf("") }
+ 
+     // User type selection
+     var expanded by remember { mutableStateOf(false) }
+@@ -51,9 +65,65 @@
+     // Location details
+     var state by remember { mutableStateOf("") }
+     var district by remember { mutableStateOf("") }
+-    var taluk by remember { mutableStateOf("") }
++    var taluka by remember { mutableStateOf("") } // Changed from 'taluk' to fix typo warning
+     var address by remember { mutableStateOf("") }
+ 
++    val context = LocalContext.current
++    val auth = remember { FirebaseAuth.getInstance() }
++    val db = remember { FirebaseFirestore.getInstance() } // Changed from 'firestore' to fix typo warning
++
++    // Function to handle sign up after OTP verification
++    val processSignUp = { credential: PhoneAuthCredential ->
++        auth.signInWithCredential(credential)
++            .addOnCompleteListener { task ->
++                if (task.isSuccessful) {
++                    // Phone verification successful, now create full account
++                    // Create email from phone number for Firebase Auth
++                    val email = "$phoneNumber@agriconnect.com"
++
++                    // Sign out from the phone auth and create a new user with email/password
++                    auth.signOut()
++
++                    auth.createUserWithEmailAndPassword(email, password)
++                        .addOnCompleteListener { createUserTask ->
++                            if (createUserTask.isSuccessful) {
++                                // User created successfully, now save additional info in Firestore
++                                val userId = auth.currentUser?.uid ?: return@addOnCompleteListener
++
++                                val userMap = hashMapOf(
++                                    "username" to username,
++                                    "phoneNumber" to phoneNumber,
++                                    "userType" to selectedUserType,
++                                    "state" to state,
++                                    "district" to district,
++                                    "taluka" to taluka,
++                                    "address" to address,
++                                    "phoneVerified" to true
++                                )
++
++                                db.collection("users").document(userId)
++                                    .set(userMap)
++                                    .addOnSuccessListener {
++                                        isLoading = false
++                                        Toast.makeText(context, "Account created successfully", Toast.LENGTH_SHORT).show()
++                                        onSignUpClick()
++                                    }
++                                    .addOnFailureListener { e ->
++                                        isLoading = false
++                                        errorMessage = "Failed to save user data: ${e.message}"
++                                    }
++                            } else {
++                                isLoading = false
++                                errorMessage = createUserTask.exception?.message ?: "Failed to create account"
++                            }
++                        }
++                } else {
++                    isLoading = false
++                    errorMessage = task.exception?.message ?: "Verification failed"
++                }
++            }
++    }
++
+     Column(
+         modifier = Modifier
+             .fillMaxSize()
+@@ -67,206 +137,320 @@
+             modifier = Modifier.padding(vertical = 24.dp)
+         )
+ 
+-        // Username field
+-        OutlinedTextField(
+-            value = username,
+-            onValueChange = { username = it },
+-            label = { Text("Username") },
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp),
+-            singleLine = true
+-        )
++        // Show error message if any
++        if (errorMessage.isNotEmpty()) {
++            Text(
++                text = errorMessage,
++                color = MaterialTheme.colorScheme.error,
++                modifier = Modifier.padding(bottom = 16.dp)
++            )
++        }
++
++        // Show success message if any
++        if (successMessage.isNotEmpty()) {
++            Text(
++                text = successMessage,
++                color = MaterialTheme.colorScheme.primary,
++                modifier = Modifier.padding(bottom = 16.dp)
++            )
++        }
++
++        if (!isVerificationSent) {
++            // Username field
++            OutlinedTextField(
++                value = username,
++                onValueChange = {
++                    username = it
++                    errorMessage = ""
++                },
++                label = { Text("Username") },
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true
++            )
+ 
+-        // Phone number field with OTP button
+-        Row(
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp),
+-            verticalAlignment = Alignment.CenterVertically
+-        ) {
++            // Phone number field
+             OutlinedTextField(
+                 value = phoneNumber,
+                 onValueChange = {
+-                    if (it.length <= 10 && it.all { char -> char.isDigit() }) phoneNumber = it
++                    if (it.length <= 10 && it.all { char -> char.isDigit() }) {
++                        phoneNumber = it
++                        errorMessage = ""
++                    }
+                 },
+                 label = { Text("Phone Number") },
+                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                 modifier = Modifier
+-                    .weight(1f)
+-                    .padding(end = 8.dp),
+-                singleLine = true
+-            )
+-
+-            Button(
+-                onClick = { otpSent = true },
+-                enabled = phoneNumber.length == 10,
+-                modifier = Modifier.padding(start = 8.dp)
+-            ) {
+-                Text("Get OTP")
+-            }
+-        }
+-
+-        // OTP Field (visible only after "Get OTP" is clicked)
+-        if (otpSent) {
+-            Text(
+-                text = "Enter OTP sent to your phone",
+-                modifier = Modifier.padding(top = 8.dp, bottom = 8.dp)
+-            )
+-
+-            OutlinedTextField(
+-                value = otp,
+-                onValueChange = {
+-                    if (it.length <= 6 && it.all { char -> char.isDigit() }) {
+-                        otp = it
+-                    }
+-                },
+-                label = { Text("Enter 6-digit OTP") },
+-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+-                modifier = Modifier
+                     .fillMaxWidth()
+                     .padding(bottom = 16.dp),
+                 singleLine = true,
+-                textStyle = LocalTextStyle.current.copy(
+-                    textAlign = TextAlign.Center,
+-                    fontSize = 18.sp
+-                )
++                prefix = { Text("+91 ") }  // Assuming India country code
+             )
+-        }
+ 
+-        // Password field
+-        OutlinedTextField(
+-            value = password,
+-            onValueChange = { password = it },
+-            label = { Text("Password") },
+-            visualTransformation = PasswordVisualTransformation(),
+-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp),
+-            singleLine = true
+-        )
++            // Password field
++            OutlinedTextField(
++                value = password,
++                onValueChange = {
++                    password = it
++                    errorMessage = ""
++                },
++                label = { Text("Password") },
++                visualTransformation = PasswordVisualTransformation(),
++                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true
++            )
+ 
+-        // Confirm Password field
+-        OutlinedTextField(
+-            value = confirmPassword,
+-            onValueChange = { confirmPassword = it },
+-            label = { Text("Confirm Password") },
+-            visualTransformation = PasswordVisualTransformation(),
+-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp),
+-            singleLine = true,
+-            isError = password != confirmPassword && confirmPassword.isNotEmpty()
+-        )
++            // Confirm Password field
++            OutlinedTextField(
++                value = confirmPassword,
++                onValueChange = {
++                    confirmPassword = it
++                    errorMessage = ""
++                },
++                label = { Text("Confirm Password") },
++                visualTransformation = PasswordVisualTransformation(),
++                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true,
++                isError = password != confirmPassword && confirmPassword.isNotEmpty()
++            )
+ 
+-        if (password != confirmPassword && confirmPassword.isNotEmpty()) {
+-            Text(
+-                text = "Passwords do not match",
+-                color = MaterialTheme.colorScheme.error,
+-                modifier = Modifier
+-                    .align(Alignment.Start)
+-                    .padding(bottom = 16.dp)
+-            )
+-        }
++            if (password != confirmPassword && confirmPassword.isNotEmpty()) {
++                Text(
++                    text = "Passwords do not match",
++                    color = MaterialTheme.colorScheme.error,
++                    modifier = Modifier
++                        .align(Alignment.Start)
++                        .padding(bottom = 16.dp)
++                )
++            }
+ 
+-        // User Type Dropdown
+-        ExposedDropdownMenuBox(
+-            expanded = expanded,
+-            onExpandedChange = { expanded = it },
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp)
+-        ) {
+-            OutlinedTextField(
+-                value = selectedUserType,
+-                onValueChange = {},
+-                readOnly = true,
+-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+-                label = { Text("User Type") },
+-                modifier = Modifier
+-                    .fillMaxWidth()
+-                    .menuAnchor()
+-            )
++            // User Type Dropdown
++            ExposedDropdownMenuBox(
++                expanded = expanded,
++                onExpandedChange = { expanded = it },
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp)
++            ) {
++                OutlinedTextField(
++                    value = selectedUserType,
++                    onValueChange = {},
++                    readOnly = true,
++                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
++                    label = { Text("User Type") },
++                    modifier = Modifier
++                        .fillMaxWidth()
++                        .menuAnchor()
++                )
+ 
+-            ExposedDropdownMenu(
+-                expanded = expanded,
+-                onDismissRequest = { expanded = false }
+-            ) {
+-                userTypes.forEach { option ->
+-                    DropdownMenuItem(
+-                        text = { Text(option) },
+-                        onClick = {
+-                            selectedUserType = option
+-                            expanded = false
+-                        }
+-                    )
+-                }
+-            }
+-        }
++                ExposedDropdownMenu(
++                    expanded = expanded,
++                    onDismissRequest = { expanded = false }
++                ) {
++                    userTypes.forEach { option ->
++                        DropdownMenuItem(
++                            text = { Text(option) },
++                            onClick = {
++                                selectedUserType = option
++                                expanded = false
++                            }
++                        )
++                    }
++                }
++            }
+ 
+-        // State field
+-        OutlinedTextField(
+-            value = state,
+-            onValueChange = { state = it },
+-            label = { Text("State") },
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp),
+-            singleLine = true
+-        )
++            // State field
++            OutlinedTextField(
++                value = state,
++                onValueChange = { state = it },
++                label = { Text("State") },
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true
++            )
+ 
+-        // District and Taluk side by side
+-        Row(
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .padding(bottom = 16.dp)
+-        ) {
+-            OutlinedTextField(
+-                value = district,
+-                onValueChange = { district = it },
+-                label = { Text("District") },
+-                modifier = Modifier
+-                    .weight(1f)
+-                    .padding(end = 8.dp),
+-                singleLine = true
+-            )
++            // District and Taluka side by side
++            Row(
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp)
++            ) {
++                OutlinedTextField(
++                    value = district,
++                    onValueChange = { district = it },
++                    label = { Text("District") },
++                    modifier = Modifier
++                        .weight(1f)
++                        .padding(end = 8.dp),
++                    singleLine = true
++                )
+ 
+-            OutlinedTextField(
+-                value = taluk,
+-                onValueChange = { taluk = it },
+-                label = { Text("Taluk") },
+-                modifier = Modifier
+-                    .weight(1f)
+-                    .padding(start = 8.dp),
+-                singleLine = true
+-            )
+-        }
++                OutlinedTextField(
++                    value = taluka,
++                    onValueChange = { taluka = it },
++                    label = { Text("Taluka") },
++                    modifier = Modifier
++                        .weight(1f)
++                        .padding(start = 8.dp),
++                    singleLine = true
++                )
++            }
+ 
+-        // Address field
+-        OutlinedTextField(
+-            value = address,
+-            onValueChange = { address = it },
+-            label = { Text("Address") },
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .height(120.dp)
+-                .padding(bottom = 24.dp),
+-            maxLines = 4
+-        )
++            // Address field
++            OutlinedTextField(
++                value = address,
++                onValueChange = { address = it },
++                label = { Text("Address") },
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .height(120.dp)
++                    .padding(bottom = 24.dp),
++                maxLines = 4
++            )
+ 
+-        // Signup button
+-        Button(
+-            onClick = { onSignUpClick() },
+-            modifier = Modifier
+-                .fillMaxWidth()
+-                .height(50.dp)
+-                .padding(bottom = 16.dp)
+-        ) {
+-            Text("Sign Up")
+-        }
++            // Send OTP button
++            Button(
++                onClick = {
++                    // Validate fields
++                    when {
++                        username.isBlank() -> errorMessage = "Username is required"
++                        phoneNumber.length != 10 -> errorMessage = "Please enter a valid 10-digit phone number"
++                        password.length < 6 -> errorMessage = "Password must be at least 6 characters"
++                        password != confirmPassword -> errorMessage = "Passwords do not match"
++                        selectedUserType == "Select User Type" -> errorMessage = "Please select a user type"
++                        state.isBlank() -> errorMessage = "State is required"
++                        district.isBlank() -> errorMessage = "District is required"
++                        else -> {
++                            // Proceed with phone verification
++                            isLoading = true
++                            errorMessage = ""
++
++                            // Format phone number with country code for Firebase
++                            val completePhoneNumber = "+91$phoneNumber"
++
++                            // Firebase phone auth setup
++                            val options = PhoneAuthOptions.newBuilder(auth)
++                                .setPhoneNumber(completePhoneNumber)
++                                .setTimeout(60L, TimeUnit.SECONDS)
++                                .setActivity(context as android.app.Activity)
++                                .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
++                                    override fun onVerificationCompleted(credential: PhoneAuthCredential) {
++                                        isLoading = false
++                                        // Auto-verification completed (rare on most devices now)
++                                        processSignUp(credential)
++                                    }
++
++                                    override fun onVerificationFailed(e: FirebaseException) {
++                                        isLoading = false
++                                        errorMessage = e.message ?: "Verification failed"
++                                    }
++
++                                    override fun onCodeSent(
++                                        verId: String,
++                                        token: PhoneAuthProvider.ForceResendingToken
++                                    ) {
++                                        isLoading = false
++                                        verificationId = verId
++                                        isVerificationSent = true
++                                        successMessage = "Verification code sent to $completePhoneNumber"
++                                    }
++                                })
++                                .build()
++
++                            PhoneAuthProvider.verifyPhoneNumber(options)
++                        }
++                    }
++                },
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .height(50.dp)
++                    .padding(bottom = 16.dp),
++                enabled = !isLoading
++            ) {
++                if (isLoading) {
++                    CircularProgressIndicator(
++                        modifier = Modifier.height(24.dp),
++                        strokeWidth = 2.dp
++                    )
++                } else {
++                    Text("Send Verification Code")
++                }
++            }
++        } else {
++            // OTP Verification Screen
++            Text(
++                text = "Enter the verification code sent to +91 $phoneNumber",
++                modifier = Modifier.padding(bottom = 24.dp)
++            )
++
++            OutlinedTextField(
++                value = verificationCode,
++                onValueChange = {
++                    if (it.length <= 6 && it.all { char -> char.isDigit() }) {
++                        verificationCode = it
++                        errorMessage = ""
++                    }
++                },
++                label = { Text("Verification Code") },
++                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .padding(bottom = 16.dp),
++                singleLine = true
++            )
++
++            Button(
++                onClick = {
++                    if (verificationCode.length != 6) {
++                        errorMessage = "Please enter a valid 6-digit verification code"
++                        return@Button
++                    }
++
++                    isLoading = true
++                    errorMessage = ""
++
++                    // Create credential with verification ID and code
++                    val credential = PhoneAuthProvider.getCredential(verificationId, verificationCode)
++                    processSignUp(credential)
++                },
++                modifier = Modifier
++                    .fillMaxWidth()
++                    .height(50.dp),
++                enabled = !isLoading
++            ) {
++                if (isLoading) {
++                    CircularProgressIndicator(
++                        modifier = Modifier.height(24.dp),
++                        strokeWidth = 2.dp
++                    )
++                } else {
++                    Text("Verify & Sign Up")
++                }
++            }
+ 
+-        Spacer(modifier = Modifier.height(16.dp))
+-    }
+-}
++            Spacer(modifier = Modifier.height(16.dp))
++
++            // Option to go back and change details
++            Button(
++                onClick = {
++                    isVerificationSent = false
++                    verificationCode = ""
++                    verificationId = ""
++                    errorMessage = ""
++                    successMessage = ""
++                },
++                modifier = Modifier.fillMaxWidth(),
++            ) {
++                Text("Change Details")
++            }
++        }
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/tutorials/agriconnect/dashboard.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutorials.agriconnect\r\n\r\nimport androidx.compose.animation.AnimatedVisibility\r\nimport androidx.compose.animation.core.tween\r\nimport androidx.compose.animation.slideInHorizontally\r\nimport androidx.compose.animation.slideOutHorizontally\r\nimport androidx.compose.foundation.Image\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.clickable\r\nimport androidx.compose.foundation.layout.*\r\nimport androidx.compose.foundation.lazy.LazyRow\r\nimport androidx.compose.foundation.rememberScrollState\r\nimport androidx.compose.foundation.shape.RoundedCornerShape\r\nimport androidx.compose.foundation.verticalScroll\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.filled.AccountCircle\r\nimport androidx.compose.material.icons.filled.Home\r\nimport androidx.compose.material.icons.filled.LocationOn\r\nimport androidx.compose.material.icons.filled.Menu\r\nimport androidx.compose.material.icons.filled.ShoppingCart\r\nimport androidx.compose.material3.*\r\nimport androidx.compose.runtime.*\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.draw.clip\r\nimport androidx.compose.ui.draw.shadow\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.graphics.ColorFilter\r\nimport androidx.compose.ui.layout.ContentScale\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.text.font.FontWeight\r\nimport androidx.compose.ui.tooling.preview.Preview\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.compose.ui.unit.sp\r\nimport androidx.compose.ui.zIndex\r\nimport androidx.compose.foundation.gestures.detectDragGestures\r\nimport androidx.compose.foundation.lazy.rememberLazyListState\r\nimport androidx.compose.material.icons.filled.ExitToApp\r\nimport androidx.compose.material.icons.filled.Face\r\nimport androidx.compose.material.icons.filled.Favorite\r\nimport androidx.compose.material.icons.filled.List\r\nimport androidx.compose.material.icons.filled.MailOutline\r\nimport androidx.compose.runtime.LaunchedEffect\r\nimport androidx.compose.runtime.rememberCoroutineScope\r\nimport androidx.compose.ui.input.pointer.pointerInput\r\nimport kotlinx.coroutines.delay\r\nimport kotlinx.coroutines.isActive\r\n\r\n\r\n/**\r\n * A complete Farmers App screen component with added commodity images\r\n */\r\n@Composable\r\nfun FarmersAppScreen() {\r\n    val scrollState = rememberScrollState()\r\n    var isSidebarVisible by remember { mutableStateOf(false) }\r\n\r\n    Box(modifier = Modifier.fillMaxSize()) {\r\n        // Main content with scroll\r\n        Box(modifier = Modifier.fillMaxSize()) {\r\n            Column(\r\n                modifier = Modifier\r\n                    .fillMaxSize()\r\n                    .background(Color(0xFF6B8E23)) // Olive green background\r\n                    .verticalScroll(scrollState)\r\n                    .padding(bottom = 72.dp) // Add padding for task bar at bottom\r\n            ) {\r\n                // Header\r\n                Row(\r\n                    modifier = Modifier\r\n                        .fillMaxWidth()\r\n                        .padding(16.dp),\r\n                    verticalAlignment = Alignment.CenterVertically,\r\n                    horizontalArrangement = Arrangement.SpaceBetween\r\n                ) {\r\n                    // Menu button for sidebar\r\n                    IconButton(\r\n                        onClick = { isSidebarVisible = true },\r\n                        modifier = Modifier\r\n                            .size(40.dp)\r\n                            .clip(RoundedCornerShape(8.dp))\r\n                            .background(Color(0x33FFFFFF))\r\n                    ) {\r\n                        Icon(\r\n                            imageVector = Icons.Default.Menu,\r\n                            contentDescription = \"Open Menu\",\r\n                            tint = Color.White\r\n                        )\r\n                    }\r\n\r\n                    Text(\r\n                        text = \"Hello, Farmers\",\r\n                        fontSize = 26.sp,\r\n                        fontWeight = FontWeight.Bold,\r\n                        color = Color.White\r\n                    )\r\n\r\n                    Row(\r\n                        verticalAlignment = Alignment.CenterVertically,\r\n                        horizontalArrangement = Arrangement.End\r\n                    ) {\r\n                        Box(\r\n                            modifier = Modifier\r\n                                .size(150.dp, 24.dp)\r\n                                .background(Color(0xFF6B8E23), shape = RoundedCornerShape(4.dp)),\r\n                            contentAlignment = Alignment.Center\r\n                        ) {\r\n                            Row {\r\n                                Text(\r\n                                    \"Location\",\r\n                                    fontSize = 18.sp,\r\n                                    fontWeight = FontWeight.Bold,\r\n                                    color = Color.White\r\n                                )\r\n                                IconButton(onClick = { /*TODO*/ }) {\r\n                                    Icon(imageVector = Icons.Default.LocationOn, contentDescription = null, tint = Color.White)\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n\r\n                // Search Bar\r\n                Box(\r\n                    modifier = Modifier\r\n                        .fillMaxWidth()\r\n                        .padding(horizontal = 16.dp)\r\n                        .clip(RoundedCornerShape(8.dp))\r\n                        .background(Color(0x99FFFFFF))\r\n                        .padding(8.dp)\r\n                ) {\r\n                    Row(\r\n                        verticalAlignment = Alignment.CenterVertically,\r\n                        modifier = Modifier.fillMaxWidth()\r\n                    ) {\r\n                        // Replace icon with a box\r\n                        Box(\r\n                            modifier = Modifier\r\n                                .size(24.dp)\r\n                                .background(\r\n                                    Color.Gray.copy(alpha = 0.3f),\r\n                                    shape = RoundedCornerShape(12.dp)\r\n                                )\r\n                        )\r\n                        Spacer(modifier = Modifier.width(8.dp))\r\n                        Text(\r\n                            text = \"Search here...\",\r\n                            color = Color.Gray,\r\n                            fontSize = 14.sp\r\n                        )\r\n                        Spacer(modifier = Modifier.weight(1f))\r\n                        // Replace icon with a box\r\n                        Box(\r\n                            modifier = Modifier\r\n                                .size(24.dp)\r\n                                .background(\r\n                                    Color.Gray.copy(alpha = 0.3f),\r\n                                    shape = RoundedCornerShape(12.dp)\r\n                                )\r\n                        )\r\n                    }\r\n                }\r\n\r\n                // NEW SECTION: Added New Scrollable Section\r\n                NewScrollableSection()\r\n\r\n                // Commodity Scroll Component\r\n                CommoditiesSection()\r\n\r\n                // My Fields Section\r\n                MyFieldsSection()\r\n\r\n                Spacer(modifier = Modifier.weight(1f))\r\n            }\r\n\r\n            // Task Bar (always visible)\r\n            TaskBar(\r\n                modifier = Modifier\r\n                    .align(Alignment.BottomCenter)\r\n                    .zIndex(10f)\r\n            )\r\n        }\r\n\r\n        // Sidebar overlay (animated)\r\n        SidebarOverlay(\r\n            isVisible = isSidebarVisible,\r\n            onDismiss = { isSidebarVisible = false }\r\n        )\r\n    }\r\n}\r\n\r\n@Composable\r\nfun SidebarOverlay(\r\n    isVisible: Boolean,\r\n    onDismiss: () -> Unit\r\n) {\r\n    // Track if the language dropdown is expanded\r\n    var isLanguageDropdownExpanded by remember { mutableStateOf(false) }\r\n\r\n    // Track the selected language\r\n    var selectedLanguage by remember { mutableStateOf(\"English\") }\r\n\r\n    Box(\r\n        modifier = Modifier\r\n            .fillMaxSize()\r\n            .zIndex(100f)\r\n    ) {\r\n        // Semi-transparent background when sidebar is visible\r\n        if (isVisible) {\r\n            Box(\r\n                modifier = Modifier\r\n                    .fillMaxSize()\r\n                    .background(Color.Black.copy(alpha = 0.5f))\r\n                    .clickable { onDismiss() }\r\n            )\r\n        }\r\n\r\n        // Animated sidebar\r\n        AnimatedVisibility(\r\n            visible = isVisible,\r\n            enter = slideInHorizontally(\r\n                initialOffsetX = { -it },\r\n                animationSpec = tween(300)\r\n            ),\r\n            exit = slideOutHorizontally(\r\n                targetOffsetX = { -it },\r\n                animationSpec = tween(300)\r\n            )\r\n        ) {\r\n            Box(\r\n                modifier = Modifier\r\n                    .fillMaxHeight()\r\n                    .width(250.dp)\r\n                    .background(Color(0xFF4A6118))\r\n                    .padding(16.dp)\r\n            ) {\r\n                Column(\r\n                    modifier = Modifier.fillMaxWidth()\r\n                ) {\r\n                    Text(\r\n                        text = \"Farmers App\",\r\n                        fontSize = 22.sp,\r\n                        fontWeight = FontWeight.Bold,\r\n                        color = Color.White,\r\n                        modifier = Modifier.padding(vertical = 24.dp)\r\n                    )\r\n\r\n                    // Sidebar menu items\r\n                    SidebarMenuItem(\r\n                        title = \"My Account\"\r\n                    ) {\r\n                        Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)\r\n                    }\r\n\r\n                    // Language menu item with dropdown\r\n                    Box(\r\n                        modifier = Modifier.fillMaxWidth()\r\n                    ) {\r\n                        Row(\r\n                            modifier = Modifier\r\n                                .fillMaxWidth()\r\n                                .padding(vertical = 12.dp)\r\n                                .clickable { isLanguageDropdownExpanded = true },\r\n                            verticalAlignment = Alignment.CenterVertically\r\n                        ) {\r\n                            Icon(\r\n                                imageVector = Icons.Default.Face,\r\n                                contentDescription = \"Languages\",\r\n                                tint = Color.White\r\n                            )\r\n\r\n                            Spacer(modifier = Modifier.width(16.dp))\r\n\r\n                            Text(\r\n                                text = \"Languages ($selectedLanguage)\",\r\n                                fontSize = 16.sp,\r\n                                color = Color.White\r\n                            )\r\n\r\n                            Spacer(modifier = Modifier.weight(1f))\r\n\r\n\r\n                        }\r\n\r\n                        // Language dropdown menu\r\n                        DropdownMenu(\r\n                            expanded = isLanguageDropdownExpanded,\r\n                            onDismissRequest = { isLanguageDropdownExpanded = false },\r\n                            modifier = Modifier\r\n                                .background(Color(0xFF3A4F11))\r\n                                .width(200.dp)\r\n                        ) {\r\n                            // English option\r\n                            DropdownMenuItem(\r\n                                text = {\r\n                                    Text(\r\n                                        text = \"English\",\r\n                                        color = if (selectedLanguage == \"English\")\r\n                                            Color.White else Color.White.copy(alpha = 0.7f),\r\n                                        fontWeight = if (selectedLanguage == \"English\")\r\n                                            FontWeight.Bold else FontWeight.Normal\r\n                                    )\r\n                                },\r\n                                onClick = {\r\n                                    selectedLanguage = \"English\"\r\n                                    isLanguageDropdownExpanded = false\r\n                                }\r\n                            )\r\n\r\n                            // Kannada option\r\n                            DropdownMenuItem(\r\n                                text = {\r\n                                    Text(\r\n                                        text = \"Kannada\",\r\n                                        color = if (selectedLanguage == \"Kannada\")\r\n                                            Color.White else Color.White.copy(alpha = 0.7f),\r\n                                        fontWeight = if (selectedLanguage == \"Kannada\")\r\n                                            FontWeight.Bold else FontWeight.Normal\r\n                                    )\r\n                                },\r\n                                onClick = {\r\n                                    selectedLanguage = \"Kannada\"\r\n                                    isLanguageDropdownExpanded = false\r\n                                }\r\n                            )\r\n                        }\r\n                    }\r\n\r\n                    SidebarMenuItem(\r\n                        title = \"Wish List\"\r\n                    ) {\r\n                        Icon(imageVector = Icons.Default.Favorite, contentDescription = null)\r\n                    }\r\n\r\n                    SidebarMenuItem(\r\n                        title = \"My Bookings\"\r\n                    ) {\r\n                        Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null)\r\n                    }\r\n\r\n                    SidebarMenuItem(\r\n                        title = \"Blogs\"\r\n                    ) {\r\n                        Icon(imageVector = Icons.Default.MailOutline, contentDescription = null)\r\n                    }\r\n\r\n                    Spacer(modifier = Modifier.weight(1f))\r\n\r\n                    // Logout at the bottom\r\n                    SidebarMenuItem(\r\n                        title = \"Logout\"\r\n                    ) {\r\n                        Icon(\r\n                            imageVector = Icons.Default.ExitToApp,\r\n                            contentDescription = null,\r\n                            tint = Color.Red\r\n                        )\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n@Composable\r\nfun SidebarMenuItem(\r\n    title: String,\r\n    icon: @Composable () -> Unit = {\r\n        Box(\r\n            modifier = Modifier\r\n                .size(24.dp)\r\n                .background(Color.White.copy(alpha = 0.3f), RoundedCornerShape(4.dp))\r\n        )\r\n    }\r\n) {\r\n    Row(\r\n        modifier = Modifier\r\n            .fillMaxWidth()\r\n            .padding(vertical = 12.dp)\r\n            .clickable { /* Handle menu item click */ },\r\n        verticalAlignment = Alignment.CenterVertically\r\n    ) {\r\n        // Icon content\r\n        icon()\r\n\r\n        Spacer(modifier = Modifier.width(16.dp))\r\n\r\n        // Menu item text\r\n        Text(\r\n            text = title,\r\n            fontSize = 16.sp,\r\n            color = Color.White\r\n        )\r\n    }\r\n}\r\n@Composable\r\nfun TaskBar(modifier: Modifier = Modifier) {\r\n    // Track the selected index\r\n    var selectedIndex by remember { mutableStateOf(0) }\r\n\r\n    Row(\r\n        modifier = modifier\r\n            .fillMaxWidth()\r\n            .height(72.dp)\r\n            .shadow(8.dp)\r\n            .background(Color.White)\r\n            .padding(horizontal = 8.dp),\r\n        horizontalArrangement = Arrangement.SpaceAround,\r\n        verticalAlignment = Alignment.CenterVertically\r\n    ) {\r\n        // Home\r\n        TaskBarItem(\r\n            icon = {\r\n                Icon(\r\n                    imageVector = Icons.Default.Home,\r\n                    contentDescription = \"Home\",\r\n                    modifier = Modifier.size(28.dp),\r\n                    tint = if (selectedIndex == 0) Color(0xFF4CAF50) else Color.Gray\r\n                )\r\n            },\r\n            text = \"Home\",\r\n            isSelected = selectedIndex == 0,\r\n            onClick = { selectedIndex = 0 }\r\n        )\r\n\r\n        // Categories\r\n        TaskBarItem(\r\n            icon = {\r\n                // Custom icon from the provided PNG resource\r\n                Image(\r\n                    painter = painterResource(id = R.drawable.categories_icon),\r\n                    contentDescription = \"Categories\",\r\n                    modifier = Modifier.size(28.dp),\r\n                    colorFilter = ColorFilter.tint(if (selectedIndex == 1) Color(0xFF4CAF50) else Color.Gray)\r\n                )\r\n            },\r\n            text = \"Categories\",\r\n            isSelected = selectedIndex == 1,\r\n            onClick = { selectedIndex = 1 }\r\n        )\r\n\r\n        // My Bookings\r\n        TaskBarItem(\r\n            icon = {\r\n                Icon(\r\n                    imageVector = Icons.Default.ShoppingCart,\r\n                    contentDescription = \"My Bookings\",\r\n                    modifier = Modifier.size(28.dp),\r\n                    tint = if (selectedIndex == 2) Color(0xFF4CAF50) else Color.Gray\r\n                )\r\n            },\r\n            text = \"My Bookings\",\r\n            isSelected = selectedIndex == 2,\r\n            onClick = { selectedIndex = 2 }\r\n        )\r\n\r\n        // My Account\r\n        TaskBarItem(\r\n            icon = {\r\n                Icon(\r\n                    imageVector = Icons.Default.AccountCircle,\r\n                    contentDescription = \"My Account\",\r\n                    modifier = Modifier.size(28.dp),\r\n                    tint = if (selectedIndex == 3) Color(0xFF4CAF50) else Color.Gray\r\n                )\r\n            },\r\n            text = \"My Account\",\r\n            isSelected = selectedIndex == 3,\r\n            onClick = { selectedIndex = 3 }\r\n        )\r\n    }\r\n}\r\n\r\n@Composable\r\nfun TaskBarItem(\r\n    icon: @Composable () -> Unit,\r\n    text: String,\r\n    isSelected: Boolean,\r\n    onClick: () -> Unit\r\n) {\r\n    Column(\r\n        horizontalAlignment = Alignment.CenterHorizontally,\r\n        modifier = Modifier\r\n            .padding(2.dp)\r\n            .clickable(onClick = onClick)\r\n    ) {\r\n        // Icon content\r\n        icon()\r\n\r\n        Spacer(modifier = Modifier.height(4.dp))\r\n\r\n        // Task name\r\n        Text(\r\n            text = text,\r\n            fontSize = 14.sp,\r\n            color = if (isSelected) Color(0xFF4CAF50) else Color.Gray,\r\n            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal\r\n        )\r\n    }\r\n}\r\n\r\n\r\n@Composable\r\nprivate fun NewScrollableSection() {\r\n    Column(\r\n        modifier = Modifier\r\n            .fillMaxWidth()\r\n            .padding(16.dp)\r\n    ) {\r\n        Text(\r\n            text = \"Featured Content\",\r\n            fontSize = 18.sp,\r\n            fontWeight = FontWeight.Bold,\r\n            color = Color.White,\r\n            modifier = Modifier.padding(bottom = 12.dp)\r\n        )\r\n\r\n        // Define items for the new section with titles and image resources\r\n        val featuredItems = listOf(\r\n            FeaturedItem(\"Sowing Machine\", R.drawable.sowingmachine),\r\n            FeaturedItem(\"Market Prices\", R.drawable.preparation),\r\n            FeaturedItem(\"Farming Tips\", R.drawable.tract3),\r\n            FeaturedItem(\"Equipment Rental\", R.drawable.sowing1),\r\n            FeaturedItem(\"Community News\", R.drawable.harvester1),\r\n            FeaturedItem(\"Seasonal Crops\", R.drawable.special2)\r\n        )\r\n\r\n        // Create an infinite list by repeating the original list\r\n        val infiniteList = remember {\r\n            generateSequence { featuredItems }.flatten().take(1000).toList()\r\n        }\r\n\r\n        // Auto-scrolling implementation\r\n        val listState = rememberLazyListState()\r\n        val coroutineScope = rememberCoroutineScope()\r\n\r\n        // Auto-scroll timer effect\r\n        LaunchedEffect(Unit) {\r\n            var currentIndex = 0\r\n            while (isActive) {\r\n                delay(3000) // 3 seconds delay between scrolls\r\n                currentIndex = (currentIndex + 1) % infiniteList.size\r\n                // Smooth scroll to the next item\r\n                listState.animateScrollToItem(\r\n                    index = currentIndex,\r\n                    scrollOffset = 0\r\n                )\r\n            }\r\n        }\r\n\r\n        // Add manual scrolling pause/resume\r\n        var isAutoScrollPaused by remember { mutableStateOf(false) }\r\n\r\n        // The LazyRow with controlled state\r\n        LazyRow(\r\n            state = listState,\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                // Pause auto-scrolling when user is interacting\r\n                .pointerInput(Unit) {\r\n                    detectDragGestures(\r\n                        onDragStart = { isAutoScrollPaused = true },\r\n                        onDragEnd = { isAutoScrollPaused = false },\r\n                        onDragCancel = { isAutoScrollPaused = false },\r\n                        onDrag = { _, _ -> }\r\n                    )\r\n                },\r\n            horizontalArrangement = Arrangement.spacedBy(12.dp)\r\n        ) {\r\n            items(infiniteList.size) { index ->\r\n                val item = infiniteList[index]\r\n                FeaturedBox(item)\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n@Composable\r\nprivate fun FeaturedBox(item: FeaturedItem) {\r\n    Box(\r\n        modifier = Modifier\r\n            .width(320.dp)\r\n            .height(200.dp)\r\n            .clip(RoundedCornerShape(12.dp))\r\n            .shadow(4.dp)\r\n    ) {\r\n        // Display the actual image with content scale\r\n        Image(\r\n            painter = painterResource(id = item.imageResId),\r\n            contentDescription = item.title,\r\n            modifier = Modifier.fillMaxSize(),\r\n            contentScale = ContentScale.Crop\r\n        )\r\n\r\n        // Semi-transparent overlay at the bottom for text\r\n        Box(\r\n            modifier = Modifier\r\n                .align(Alignment.BottomCenter)\r\n                .fillMaxWidth()\r\n                .background(Color.Black.copy(alpha = 0.5f))\r\n                .padding(8.dp)\r\n        ) {\r\n            Text(\r\n                text = item.title,\r\n                fontSize = 16.sp,\r\n                fontWeight = FontWeight.Bold,\r\n                color = Color.White,\r\n                modifier = Modifier.align(Alignment.Center)\r\n            )\r\n        }\r\n    }\r\n}\r\n\r\n/**\r\n * A data class representing a featured item with a title and image resource\r\n */\r\nprivate data class FeaturedItem(\r\n    val title: String,\r\n    val imageResId: Int\r\n)\r\n@Composable\r\nprivate fun CommoditiesSection() {\r\n    Column(\r\n        modifier = Modifier\r\n            .fillMaxWidth()\r\n            .padding(16.dp)\r\n    ) {\r\n        Text(\r\n            text = \"Commodities and Food\",\r\n            fontSize = 18.sp,\r\n            fontWeight = FontWeight.Bold,\r\n            color = Color.White,\r\n            modifier = Modifier.padding(bottom = 12.dp)\r\n        )\r\n\r\n        // Define commodity items for first row with image resources\r\n        val commoditiesRow1 = listOf(\r\n            Commodity(\"Rice\", R.drawable.rice),\r\n            Commodity(\"Corn\", R.drawable.corn),\r\n            Commodity(\"Ragi\", R.drawable.ragi),\r\n            Commodity(\"Wheat\", R.drawable.wheat),\r\n            Commodity(\"Potato\", R.drawable.potato),\r\n            Commodity(\"Vegetable\", R.drawable.vegetables),\r\n            Commodity(\"Soyabean\", R.drawable.soyabean)\r\n        )\r\n\r\n        // Define commodity items for second row with image resources\r\n        val commoditiesRow2 = listOf(\r\n            Commodity(\"Ginger\", R.drawable.ginger),\r\n            Commodity(\"Areca nut\", R.drawable.areca_nut),\r\n            Commodity(\"Sugarcane\", R.drawable.sugarcane),\r\n            Commodity(\"Cotton\", R.drawable.cotton),\r\n            Commodity(\"Groundnut\", R.drawable.groundnut),\r\n            Commodity(\"ChickPea\", R.drawable.chickpea),\r\n            Commodity(\"Coconut\", R.drawable.coconut),\r\n            Commodity(\"Fruits\", R.drawable.fruits)\r\n\r\n        )\r\n\r\n        // Create an infinite list by repeating the original list\r\n        val infiniteList1 = remember {\r\n            generateSequence { commoditiesRow1 }.flatten().take(1000).toList()\r\n        }\r\n\r\n        // First row of commodities\r\n        LazyRow(\r\n            modifier = Modifier.fillMaxWidth(),\r\n            horizontalArrangement = Arrangement.spacedBy(12.dp)\r\n        ) {\r\n            items(infiniteList1.size) { index ->\r\n                val commodity = infiniteList1[index]\r\n                CommodityBox(commodity)\r\n            }\r\n        }\r\n\r\n        // Add spacing between rows\r\n        Spacer(modifier = Modifier.height(12.dp))\r\n\r\n        // Create an infinite list by repeating the original list\r\n        val infiniteList2 = remember {\r\n            generateSequence { commoditiesRow2 }.flatten().take(1000).toList()\r\n        }\r\n\r\n        // Second row of commodities\r\n        LazyRow(\r\n            modifier = Modifier.fillMaxWidth(),\r\n            horizontalArrangement = Arrangement.spacedBy(12.dp)\r\n        ) {\r\n            items(infiniteList2.size) { index ->\r\n                val commodity = infiniteList2[index]\r\n                CommodityBox(commodity)\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n@Composable\r\nprivate fun CommodityBox(commodity: Commodity) {\r\n    Column(\r\n        horizontalAlignment = Alignment.CenterHorizontally,\r\n        modifier = Modifier.width(64.dp)\r\n    ) {\r\n        // Image container with white background\r\n        Box(\r\n            modifier = Modifier\r\n                .size(64.dp)\r\n                .clip(RoundedCornerShape(12.dp))\r\n                .background(Color.White),\r\n            contentAlignment = Alignment.Center\r\n        ) {\r\n            // Load the actual image\r\n            Image(\r\n                painter = painterResource(id = commodity.imageResId),\r\n                contentDescription = commodity.name,\r\n                modifier = Modifier//.fillMaxSize()    //for full size icon\r\n                    .size(48.dp)\r\n                    .clip(RoundedCornerShape(8.dp)),\r\n                contentScale = ContentScale.Crop\r\n            )\r\n        }\r\n\r\n        Spacer(modifier = Modifier.height(4.dp))\r\n\r\n        Text(\r\n            text = commodity.name,\r\n            fontSize = 12.sp,\r\n            color = Color.White\r\n        )\r\n    }\r\n}\r\n\r\n@Composable\r\nprivate fun MyFieldsSection() {\r\n    // Combined list of all crops from both commodity rows\r\n    val allCrops = listOf(\r\n        \"Rice\", \"Corn\", \"Ragi\", \"Wheat\", \"Potato\", \"Vegetable\", \"Soyabean\",\r\n        \"Ginger\", \"Areca nut\", \"Sugarcane\", \"Cotton\", \"Groundnut\", \"ChickPea\", \"Coconut\", \"Fruits\"\r\n    )\r\n\r\n    // State for dropdown expanded status\r\n    var isDropdownExpanded by remember { mutableStateOf(false) }\r\n\r\n    // State for selected crop - null means no selection yet\r\n    var selectedCrop by remember { mutableStateOf<String?>(null) }\r\n\r\n    Column(\r\n        modifier = Modifier\r\n            .fillMaxWidth()\r\n            .padding(16.dp)\r\n    ) {\r\n        // Title and dropdown row\r\n        Row(\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .padding(bottom = 12.dp),\r\n            verticalAlignment = Alignment.CenterVertically,\r\n            horizontalArrangement = Arrangement.SpaceBetween\r\n        ) {\r\n            // Section title\r\n            Text(\r\n                text = \"My Fields\",\r\n                fontSize = 18.sp,\r\n                fontWeight = FontWeight.Bold,\r\n                color = Color.White\r\n            )\r\n\r\n            // Crop Selection Dropdown\r\n            Box {\r\n                // Dropdown trigger button\r\n                Button(\r\n                    onClick = { isDropdownExpanded = true },\r\n                    colors = ButtonDefaults.buttonColors(\r\n                        containerColor = Color.White,\r\n                        contentColor = Color(0xFF4A6118)\r\n                    ),\r\n                    shape = RoundedCornerShape(8.dp),\r\n                    modifier = Modifier.height(36.dp)\r\n                ) {\r\n                    Row(\r\n                        verticalAlignment = Alignment.CenterVertically,\r\n                        horizontalArrangement = Arrangement.spacedBy(8.dp)\r\n                    ) {\r\n                        Text(\r\n                            text = selectedCrop ?: \"Select crop\",\r\n                            fontSize = 14.sp,\r\n                            fontWeight = FontWeight.Medium\r\n                        )\r\n                        // Dropdown icon\r\n                        Icon(\r\n                            imageVector = Icons.Default.List,\r\n                            contentDescription = \"Select Crop\",\r\n                            modifier = Modifier.size(16.dp)\r\n                        )\r\n                    }\r\n                }\r\n\r\n                // Dropdown menu\r\n                DropdownMenu(\r\n                    expanded = isDropdownExpanded,\r\n                    onDismissRequest = { isDropdownExpanded = false },\r\n                    modifier = Modifier\r\n                        .background(Color.White)\r\n                        .width(180.dp)\r\n                ) {\r\n                    allCrops.forEach { crop ->\r\n                        DropdownMenuItem(\r\n                            text = {\r\n                                Text(\r\n                                    text = crop,\r\n                                    fontSize = 14.sp,\r\n                                    color = if (crop == selectedCrop) Color(0xFF4A6118) else Color.Black\r\n                                )\r\n                            },\r\n                            onClick = {\r\n                                selectedCrop = crop\r\n                                isDropdownExpanded = false\r\n                            },\r\n                            colors = MenuDefaults.itemColors(\r\n                                textColor = Color.Black\r\n                            )\r\n                        )\r\n                    }\r\n                }\r\n            }\r\n        }\r\n\r\n        // Fields display area\r\n        Box(\r\n            modifier = Modifier\r\n                .fillMaxWidth()\r\n                .height(120.dp)\r\n                .clip(RoundedCornerShape(12.dp))\r\n                .background(Color(0x22FFFFFF)),\r\n            contentAlignment = Alignment.Center\r\n        ) {\r\n            // Display based on whether a crop is selected\r\n            if (selectedCrop != null) {\r\n                // Show the selected crop info\r\n                Column(\r\n                    horizontalAlignment = Alignment.CenterHorizontally\r\n                ) {\r\n                    Text(\r\n                        text = selectedCrop!!,\r\n                        fontSize = 16.sp,\r\n                        fontWeight = FontWeight.Bold,\r\n                        color = Color.White\r\n                    )\r\n                    Spacer(modifier = Modifier.height(8.dp))\r\n                    Text(\r\n                        text = \"Field information for $selectedCrop will be displayed here\",\r\n                        fontSize = 14.sp,\r\n                        color = Color.White.copy(alpha = 0.8f),\r\n                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,\r\n                        modifier = Modifier.padding(horizontal = 16.dp)\r\n                    )\r\n                }\r\n            } else {\r\n                // Show prompt to select a crop\r\n                Text(\r\n                    text = \"Please select a crop to view field information\",\r\n                    fontSize = 14.sp,\r\n                    color = Color.White.copy(alpha = 0.8f),\r\n                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,\r\n                    modifier = Modifier.padding(horizontal = 16.dp)\r\n                )\r\n            }\r\n        }\r\n    }\r\n}\r\n/**\r\n * A data class representing a commodity with a name and image resource\r\n */\r\nprivate data class Commodity(\r\n    val name: String,\r\n    val imageResId: Int\r\n)\r\n\r\n@Preview(showBackground = true)\r\n@Composable\r\nfun Preview() {\r\n    FarmersAppScreen()\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutorials/agriconnect/dashboard.kt b/app/src/main/java/com/tutorials/agriconnect/dashboard.kt
+--- a/app/src/main/java/com/tutorials/agriconnect/dashboard.kt	
++++ b/app/src/main/java/com/tutorials/agriconnect/dashboard.kt	
+@@ -7,42 +7,63 @@
+ import androidx.compose.foundation.Image
+ import androidx.compose.foundation.background
+ import androidx.compose.foundation.clickable
+-import androidx.compose.foundation.layout.*
++import androidx.compose.foundation.gestures.detectDragGestures
++import androidx.compose.foundation.layout.Arrangement
++import androidx.compose.foundation.layout.Box
++import androidx.compose.foundation.layout.Column
++import androidx.compose.foundation.layout.Row
++import androidx.compose.foundation.layout.Spacer
++import androidx.compose.foundation.layout.fillMaxHeight
++import androidx.compose.foundation.layout.fillMaxSize
++import androidx.compose.foundation.layout.fillMaxWidth
++import androidx.compose.foundation.layout.height
++import androidx.compose.foundation.layout.padding
++import androidx.compose.foundation.layout.size
++import androidx.compose.foundation.layout.width
+ import androidx.compose.foundation.lazy.LazyRow
++import androidx.compose.foundation.lazy.rememberLazyListState
+ import androidx.compose.foundation.rememberScrollState
+ import androidx.compose.foundation.shape.RoundedCornerShape
+ import androidx.compose.foundation.verticalScroll
+ import androidx.compose.material.icons.Icons
+ import androidx.compose.material.icons.filled.AccountCircle
++import androidx.compose.material.icons.filled.ExitToApp
++import androidx.compose.material.icons.filled.Face
++import androidx.compose.material.icons.filled.Favorite
+ import androidx.compose.material.icons.filled.Home
++import androidx.compose.material.icons.filled.List
+ import androidx.compose.material.icons.filled.LocationOn
++import androidx.compose.material.icons.filled.MailOutline
+ import androidx.compose.material.icons.filled.Menu
+ import androidx.compose.material.icons.filled.ShoppingCart
+-import androidx.compose.material3.*
+-import androidx.compose.runtime.*
++import androidx.compose.material3.Button
++import androidx.compose.material3.ButtonDefaults
++import androidx.compose.material3.DropdownMenu
++import androidx.compose.material3.DropdownMenuItem
++import androidx.compose.material3.Icon
++import androidx.compose.material3.IconButton
++import androidx.compose.material3.MenuDefaults
++import androidx.compose.material3.Text
++import androidx.compose.runtime.Composable
++import androidx.compose.runtime.LaunchedEffect
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.rememberCoroutineScope
++import androidx.compose.runtime.setValue
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.draw.clip
+ import androidx.compose.ui.draw.shadow
+ import androidx.compose.ui.graphics.Color
+ import androidx.compose.ui.graphics.ColorFilter
++import androidx.compose.ui.input.pointer.pointerInput
+ import androidx.compose.ui.layout.ContentScale
+ import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.text.font.FontWeight
+-import androidx.compose.ui.tooling.preview.Preview
+ import androidx.compose.ui.unit.dp
+ import androidx.compose.ui.unit.sp
+ import androidx.compose.ui.zIndex
+-import androidx.compose.foundation.gestures.detectDragGestures
+-import androidx.compose.foundation.lazy.rememberLazyListState
+-import androidx.compose.material.icons.filled.ExitToApp
+-import androidx.compose.material.icons.filled.Face
+-import androidx.compose.material.icons.filled.Favorite
+-import androidx.compose.material.icons.filled.List
+-import androidx.compose.material.icons.filled.MailOutline
+-import androidx.compose.runtime.LaunchedEffect
+-import androidx.compose.runtime.rememberCoroutineScope
+-import androidx.compose.ui.input.pointer.pointerInput
+ import kotlinx.coroutines.delay
+ import kotlinx.coroutines.isActive
+ 
+@@ -51,7 +72,7 @@
+  * A complete Farmers App screen component with added commodity images
+  */
+ @Composable
+-fun FarmersAppScreen() {
++fun FarmersAppScreen(onLogout: () -> Unit) {
+     val scrollState = rememberScrollState()
+     var isSidebarVisible by remember { mutableStateOf(false) }
+ 
+@@ -120,6 +141,7 @@
+                     }
+                 }
+ 
++                // Rest of the content remains the same
+                 // Search Bar
+                 Box(
+                     modifier = Modifier
+@@ -181,10 +203,11 @@
+             )
+         }
+ 
+-        // Sidebar overlay (animated)
++        // Sidebar overlay (animated) - pass the logout callback
+         SidebarOverlay(
+             isVisible = isSidebarVisible,
+-            onDismiss = { isSidebarVisible = false }
++            onDismiss = { isSidebarVisible = false },
++            onLogout = onLogout
+         )
+     }
+ }
+@@ -192,7 +215,8 @@
+ @Composable
+ fun SidebarOverlay(
+     isVisible: Boolean,
+-    onDismiss: () -> Unit
++    onDismiss: () -> Unit,
++    onLogout: () -> Unit
+ ) {
+     // Track if the language dropdown is expanded
+     var isLanguageDropdownExpanded by remember { mutableStateOf(false) }
+@@ -252,7 +276,7 @@
+                         Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+                     }
+ 
+-                    // Language menu item with dropdown
++                    // Language menu item with dropdown - same as before
+                     Box(
+                         modifier = Modifier.fillMaxWidth()
+                     ) {
+@@ -278,8 +302,6 @@
+                             )
+ 
+                             Spacer(modifier = Modifier.weight(1f))
+-
+-
+                         }
+ 
+                         // Language dropdown menu
+@@ -346,9 +368,10 @@
+ 
+                     Spacer(modifier = Modifier.weight(1f))
+ 
+-                    // Logout at the bottom
++                    // Logout at the bottom - Connect to the passed logout function
+                     SidebarMenuItem(
+-                        title = "Logout"
++                        title = "Logout",
++                        onClick = onLogout
+                     ) {
+                         Icon(
+                             imageVector = Icons.Default.ExitToApp,
+@@ -365,6 +388,7 @@
+ @Composable
+ fun SidebarMenuItem(
+     title: String,
++    onClick: () -> Unit = {},  // Add onClick parameter with default empty function
+     icon: @Composable () -> Unit = {
+         Box(
+             modifier = Modifier
+@@ -377,7 +401,7 @@
+         modifier = Modifier
+             .fillMaxWidth()
+             .padding(vertical = 12.dp)
+-            .clickable { /* Handle menu item click */ },
++            .clickable(onClick = onClick),  // Use the onClick parameter
+         verticalAlignment = Alignment.CenterVertically
+     ) {
+         // Icon content
+@@ -875,8 +899,3 @@
+     val imageResId: Int
+ )
+ 
+-@Preview(showBackground = true)
+-@Composable
+-fun Preview() {
+-    FarmersAppScreen()
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/tutorials/agriconnect/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.tutorials.agriconnect\r\n\r\nimport android.os.Bundle\r\nimport androidx.activity.ComponentActivity\r\nimport androidx.activity.compose.setContent\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.material3.MaterialTheme\r\nimport androidx.compose.material3.Surface\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.navigation.compose.NavHost\r\nimport androidx.navigation.compose.composable\r\nimport androidx.navigation.compose.rememberNavController\r\nimport com.tutorials.agriconnect.ui.theme.AgriconnectTheme\r\n\r\nclass MainActivity : ComponentActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n\r\n        val sharedPreferences = getSharedPreferences(\"AgriConnectPrefs\", MODE_PRIVATE)\r\n        val isLoggedIn = sharedPreferences.getBoolean(\"isLoggedIn\", false)\r\n\r\n        setContent {\r\n            AgriconnectTheme {\r\n                Surface(\r\n                    modifier = Modifier.fillMaxSize(),\r\n                    color = MaterialTheme.colorScheme.background\r\n                ) {\r\n                    // Set up navigation\r\n                    val navController = rememberNavController()\r\n                    val startDestination = if (isLoggedIn) \"Dashboard\" else \"GetStarted\"\r\n\r\n                    NavHost(navController = navController, startDestination = startDestination) {\r\n                        composable(\"GetStarted\") {\r\n                            getStarted {\r\n                                navController.navigate(\"Login\")\r\n                            }\r\n                        }\r\n\r\n                        composable(\"Login\") {\r\n                            LoginScreen(\r\n                                onLoginClick = {\r\n                                    // Save login status\r\n                                    with(sharedPreferences.edit()) {\r\n                                        putBoolean(\"isLoggedIn\", true)\r\n                                        apply()\r\n                                    }\r\n\r\n                                    // Navigate to Dashboard\r\n                                    navController.navigate(\"Dashboard\") {\r\n                                        popUpTo(\"GetStarted\") { inclusive = true }\r\n                                    }\r\n                                },\r\n                                onSignUpClick = {\r\n                                    navController.navigate(\"Signup\")\r\n                                },\r\n                                onForgotClick = {\r\n                                    // Handle forgot password - no navigation needed here\r\n                                }\r\n                            )\r\n                        }\r\n\r\n                        composable(\"Signup\") {\r\n                            SignupScreen {\r\n                                // Save login status\r\n                                with(sharedPreferences.edit()) {\r\n                                    putBoolean(\"isLoggedIn\", true)\r\n                                    apply()\r\n                                }\r\n\r\n                                // Navigate to Dashboard\r\n                                navController.navigate(\"Dashboard\") {\r\n                                    popUpTo(\"GetStarted\") { inclusive = true }\r\n                                }\r\n                            }\r\n                        }\r\n\r\n                        composable(\"Dashboard\") {\r\n                            FarmersAppScreen()\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tutorials/agriconnect/MainActivity.kt b/app/src/main/java/com/tutorials/agriconnect/MainActivity.kt
+--- a/app/src/main/java/com/tutorials/agriconnect/MainActivity.kt	
++++ b/app/src/main/java/com/tutorials/agriconnect/MainActivity.kt	
+@@ -6,18 +6,27 @@
+ import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.material3.MaterialTheme
+ import androidx.compose.material3.Surface
++import androidx.compose.runtime.LaunchedEffect
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.setValue
+ import androidx.compose.ui.Modifier
+ import androidx.navigation.compose.NavHost
+ import androidx.navigation.compose.composable
+ import androidx.navigation.compose.rememberNavController
++import com.google.firebase.auth.FirebaseAuth
+ import com.tutorials.agriconnect.ui.theme.AgriconnectTheme
+ 
+ class MainActivity : ComponentActivity() {
++    private lateinit var auth: FirebaseAuth
++    private var authStateListener: FirebaseAuth.AuthStateListener? = null
++
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+ 
+-        val sharedPreferences = getSharedPreferences("AgriConnectPrefs", MODE_PRIVATE)
+-        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
++        // Initialize Firebase Auth
++        auth = FirebaseAuth.getInstance()
+ 
+         setContent {
+             AgriconnectTheme {
+@@ -27,6 +36,35 @@
+                 ) {
+                     // Set up navigation
+                     val navController = rememberNavController()
++                    var isLoggedIn by remember { mutableStateOf(auth.currentUser != null) }
++
++                    // Listen for auth state changes
++                    LaunchedEffect(Unit) {
++                        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
++                            isLoggedIn = firebaseAuth.currentUser != null
++
++                            // Update SharedPreferences for backward compatibility
++                            with(getSharedPreferences("AgriConnectPrefs", MODE_PRIVATE).edit()) {
++                                putBoolean("isLoggedIn", isLoggedIn)
++                                apply()
++                            }
++
++                            // Navigate based on auth state
++                            if (isLoggedIn) {
++                                navController.navigate("Dashboard") {
++                                    popUpTo("GetStarted") { inclusive = true }
++                                }
++                            } else if (navController.currentDestination?.route != "GetStarted" &&
++                                navController.currentDestination?.route != "Login" &&
++                                navController.currentDestination?.route != "Signup") {
++                                navController.navigate("GetStarted") {
++                                    popUpTo(0) { inclusive = true }
++                                }
++                            }
++                        }
++                        auth.addAuthStateListener(authStateListener!!)
++                    }
++
+                     val startDestination = if (isLoggedIn) "Dashboard" else "GetStarted"
+ 
+                     NavHost(navController = navController, startDestination = startDestination) {
+@@ -39,47 +77,48 @@
+                         composable("Login") {
+                             LoginScreen(
+                                 onLoginClick = {
+-                                    // Save login status
+-                                    with(sharedPreferences.edit()) {
+-                                        putBoolean("isLoggedIn", true)
+-                                        apply()
+-                                    }
+-
+-                                    // Navigate to Dashboard
+-                                    navController.navigate("Dashboard") {
+-                                        popUpTo("GetStarted") { inclusive = true }
+-                                    }
++                                    // Navigation will be handled by auth state listener
+                                 },
+                                 onSignUpClick = {
+                                     navController.navigate("Signup")
+                                 },
+                                 onForgotClick = {
+-                                    // Handle forgot password - no navigation needed here
++                                    // Handle forgot password
++                                    navController.navigate("ForgotPassword")
+                                 }
+                             )
+                         }
+ 
+                         composable("Signup") {
+                             SignupScreen {
+-                                // Save login status
+-                                with(sharedPreferences.edit()) {
+-                                    putBoolean("isLoggedIn", true)
+-                                    apply()
+-                                }
+-
+-                                // Navigate to Dashboard
+-                                navController.navigate("Dashboard") {
+-                                    popUpTo("GetStarted") { inclusive = true }
+-                                }
+-                            }
++                                // Navigation will be handled by auth state listener
++                            }
++                        }
++
++                        composable("ForgotPassword") {
++                            ForgotPasswordScreen(
++                                onBackClick = { navController.popBackStack() }
++                            )
+                         }
+ 
+                         composable("Dashboard") {
+-                            FarmersAppScreen()
++                            // Change from DashboardScreen to FarmersAppScreen with logout functionality
++                            FarmersAppScreen(
++                                onLogout = {
++                                    auth.signOut()
++                                    // Navigation will be handled by auth state listener
++                                }
++                            )
+                         }
+                     }
+                 }
+             }
+         }
+     }
++
++    override fun onDestroy() {
++        super.onDestroy()
++        // Remove auth listener to avoid memory leaks
++        authStateListener?.let { auth.removeAuthStateListener(it) }
++    }
+ }
+\ No newline at end of file

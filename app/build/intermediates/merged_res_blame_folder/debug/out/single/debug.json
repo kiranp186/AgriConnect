@@ -1,0 +1,342 @@
+[
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_drone.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/drone.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_trailers.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/trailers.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tract5.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tract5.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_plow.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/plow.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tractorcon.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tractorcon.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_special2.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/special2.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_placeholder.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/placeholder.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_coconutmanualclimb.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/coconutmanualclimb.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_cultivator.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/cultivator.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/xml_data_extraction_rules.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_rice.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/rice.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_rotavator.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/rotavator.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_winnower.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/winnower.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_ragi_icon.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/ragi_icon.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_millingmachine.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/millingmachine.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_cotton.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/cotton.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/navigation_main_graph.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/navigation/main_graph.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_corn.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/corn.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_sugarcaneharvester.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/sugarcaneharvester.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_harrow.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/harrow.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_harvestrer.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/harvestrer.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_ginger.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/ginger.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_dripirrigation.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/dripirrigation.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_potato.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/potato.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_sugarcane.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/sugarcane.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_groundnut.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/groundnut.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_seeddrill.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/seeddrill.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_graindryer.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/graindryer.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_sprinklersystem.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/sprinklersystem.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_placeholder_image.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/placeholder_image.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_coconut.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/coconut.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tractorfertilizerspreader.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tractorfertilizerspreader.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_areca_nut.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/areca_nut.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_combineharvester.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/combineharvester.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_harvetr.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/harvetr.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_soyabean.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/soyabean.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_planting.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/planting.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_protect.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/protect.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_postharvest1.avif.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/postharvest1.avif"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_categories_icon.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/categories_icon.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tract3.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tract3.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_chickpea.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/chickpea.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_leveller.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/leveller.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/xml_backup_rules.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_sowing1.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/sowing1.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_diskplow.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/diskplow.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_vegetables.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/vegetables.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_cottonpicker.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/cottonpicker.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_landpreparation1.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/landpreparation1.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_transplanter.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/transplanter.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_special.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/special.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_fertilizerspreader.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/fertilizerspreader.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_preparation.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/preparation.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_harvester1.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/harvester1.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_drone1.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/drone1.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tract4.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tract4.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_sowingmachine.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/sowingmachine.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_ragi.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/ragi.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_potatodigger.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/potatodigger.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_fruits.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/fruits.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_baler.png.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/baler.png"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_threshingmachine.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/threshingmachine.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tract1.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tract1.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_potatoplanter.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/potatoplanter.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_coconutmotorclimb.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/coconutmotorclimb.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_tractor.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/tractor.webp"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_reaper.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/reaper.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_broadcastseeder.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/broadcastseeder.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_conveyorbelts.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/conveyorbelts.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_wheat.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/wheat.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_postharvest.jpg.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/postharvest.jpg"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.tutorials.agriconnect.app-merged_res-74:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.tutorials.agriconnect.app-main-76:/mipmap-xxhdpi/ic_launcher_round.webp"
+    }
+]
