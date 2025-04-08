@@ -1,12 +1,16 @@
 plugins {
-    id("com.android.application")
+
+
+        id("com.android.application") version "8.2.0-rc01"
+
+
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.serialization") // Add this line
 }
 
 android {
     namespace = "com.tutorials.agriconnect"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         applicationId = "com.tutorials.agriconnect"
         minSdk = 26
@@ -50,7 +54,9 @@ android {
 dependencies {
     // Kotlin Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
-
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
     // Existing dependencies
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
