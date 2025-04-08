@@ -48,10 +48,12 @@ import kotlinx.coroutines.isActive
 
 
 /**
- * A complete Farmers App screen component with added commodity images
+ * A complete Farmers App screen component with added commodity images and navigation
  */
 @Composable
-fun FarmersAppScreen() {
+fun FarmersAppScreen(
+    onCommodityClick: (String) -> Unit = {}  // Parameter for navigation
+) {
     val scrollState = rememberScrollState()
     var isSidebarVisible by remember { mutableStateOf(false) }
 
@@ -164,8 +166,8 @@ fun FarmersAppScreen() {
                 // NEW SECTION: Added New Scrollable Section
                 NewScrollableSection()
 
-                // Commodity Scroll Component
-                CommoditiesSection()
+                // Commodity Scroll Component - Pass the navigation handler
+                CommoditiesSection(onCommodityClick = onCommodityClick)
 
                 // My Fields Section
                 MyFieldsSection()
@@ -393,6 +395,7 @@ fun SidebarMenuItem(
         )
     }
 }
+
 @Composable
 fun TaskBar(modifier: Modifier = Modifier) {
     // Track the selected index
@@ -498,7 +501,6 @@ fun TaskBarItem(
         )
     }
 }
-
 
 @Composable
 private fun NewScrollableSection() {
@@ -618,8 +620,11 @@ private data class FeaturedItem(
     val title: String,
     val imageResId: Int
 )
+
 @Composable
-private fun CommoditiesSection() {
+private fun CommoditiesSection(
+    onCommodityClick: (String) -> Unit = {}  // Navigation handler
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -654,7 +659,6 @@ private fun CommoditiesSection() {
             Commodity("ChickPea", R.drawable.chickpea),
             Commodity("Coconut", R.drawable.coconut),
             Commodity("Fruits", R.drawable.fruits)
-
         )
 
         // Create an infinite list by repeating the original list
@@ -669,7 +673,10 @@ private fun CommoditiesSection() {
         ) {
             items(infiniteList1.size) { index ->
                 val commodity = infiniteList1[index]
-                CommodityBox(commodity)
+                CommodityBox(
+                    commodity = commodity,
+                    onClick = { onCommodityClick(commodity.name) }  // Pass navigation callback
+                )
             }
         }
 
@@ -688,17 +695,25 @@ private fun CommoditiesSection() {
         ) {
             items(infiniteList2.size) { index ->
                 val commodity = infiniteList2[index]
-                CommodityBox(commodity)
+                CommodityBox(
+                    commodity = commodity,
+                    onClick = { onCommodityClick(commodity.name) }  // Pass navigation callback
+                )
             }
         }
     }
 }
 
 @Composable
-private fun CommodityBox(commodity: Commodity) {
+private fun CommodityBox(
+    commodity: Commodity,
+    onClick: () -> Unit = {}  // Click handler
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.width(64.dp)
+        modifier = Modifier
+            .width(64.dp)
+            .clickable(onClick = onClick)  // Add clickable modifier with onClick handler
     ) {
         // Image container with white background
         Box(
@@ -712,7 +727,7 @@ private fun CommodityBox(commodity: Commodity) {
             Image(
                 painter = painterResource(id = commodity.imageResId),
                 contentDescription = commodity.name,
-                modifier = Modifier//.fillMaxSize()    //for full size icon
+                modifier = Modifier
                     .size(48.dp)
                     .clip(RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
@@ -867,6 +882,7 @@ private fun MyFieldsSection() {
         }
     }
 }
+
 /**
  * A data class representing a commodity with a name and image resource
  */
@@ -878,5 +894,6 @@ private data class Commodity(
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
-    FarmersAppScreen()
+    // Using empty lambda for preview since navigation won't be used in preview
+    FarmersAppScreen(onCommodityClick = {})
 }

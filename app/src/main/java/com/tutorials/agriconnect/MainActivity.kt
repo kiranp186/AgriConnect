@@ -6,16 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.tutorials.agriconnect.ui.theme.AgriconnectTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val sharedPreferences = getSharedPreferences("AgriConnectPrefs", MODE_PRIVATE)
         val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
@@ -44,10 +46,11 @@ class MainActivity : ComponentActivity() {
                                         putBoolean("isLoggedIn", true)
                                         apply()
                                     }
-
                                     // Navigate to Dashboard
                                     navController.navigate("Dashboard") {
-                                        popUpTo("GetStarted") { inclusive = true }
+                                        popUpTo("GetStarted") {
+                                            inclusive = true
+                                        }
                                     }
                                 },
                                 onSignUpClick = {
@@ -66,16 +69,37 @@ class MainActivity : ComponentActivity() {
                                     putBoolean("isLoggedIn", true)
                                     apply()
                                 }
-
                                 // Navigate to Dashboard
                                 navController.navigate("Dashboard") {
-                                    popUpTo("GetStarted") { inclusive = true }
+                                    popUpTo("GetStarted") {
+                                        inclusive = true
+                                    }
                                 }
                             }
                         }
 
                         composable("Dashboard") {
-                            FarmersAppScreen()
+                            FarmersAppScreen(
+                                onCommodityClick = { cropName ->
+                                    navController.navigate("CropSpecific/$cropName")
+                                }
+                            )
+                        }
+
+                        // Add route for CropSpecificScreen with cropName parameter
+                        composable(
+                            route = "CropSpecific/{cropName}",
+                            arguments = listOf(
+                                navArgument("cropName") { type = NavType.StringType }
+                            )
+                        ) { backStackEntry ->
+                            val cropName = backStackEntry.arguments?.getString("cropName") ?: "Rice"
+                            CropSpecificScreen(
+                                cropName = cropName,
+                                onBackClick = {
+                                    navController.navigateUp()
+                                }
+                            )
                         }
                     }
                 }
