@@ -16,7 +16,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="701ce7d6-9fb1-4020-9892-92a4af0f08c5" name="Changes" comment="lowercase commit" />
+    <list default="true" id="701ce7d6-9fb1-4020-9892-92a4af0f08c5" name="Changes" comment="img remove commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -470,7 +470,23 @@
       <option name="project" value="LOCAL" />
       <updated>1744119446048</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="img remove commit">
+      <option name="closed" value="true" />
+      <created>1744129829836</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1744129829836</updated>
+    </task>
+    <task id="LOCAL-00035" summary="img remove commit">
+      <option name="closed" value="true" />
+      <created>1744130060767</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1744130060767</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -497,7 +513,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sidebar icons" />
     <MESSAGE value="sidebar" />
     <MESSAGE value="item list" />
     <MESSAGE value="color" />
@@ -522,6 +537,7 @@
     <MESSAGE value="navigation claude" />
     <MESSAGE value="Firebase Dependencies" />
     <MESSAGE value="lowercase commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="lowercase commit" />
+    <MESSAGE value="img remove commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="img remove commit" />
   </component>
 </project>
